@@ -1,0 +1,164 @@
+﻿<ManagementPack ContentReadable="true" SchemaVersion="2.0" OriginalSchemaVersion="1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <Manifest>
+    <Identity>
+      <ID>Custom.Cireson.TimerActivity.Workflow</ID>
+      <Version>1.1.0.3</Version>
+    </Identity>
+    <Name>Custom.Cireson.TimerActivity.Workflow</Name>
+    <References>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Console">
+        <ID>Microsoft.EnterpriseManagement.ServiceManager.UI.Console</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="EnterpriseManagement">
+        <ID>Microsoft.EnterpriseManagement.ServiceManager.UI.Administration</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SystemCenter">
+        <ID>Microsoft.SystemCenter.Library</ID>
+        <Version>7.0.8437.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SystemCenter1">
+        <ID>Microsoft.SystemCenter.Subscriptions</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Core">
+        <ID>ServiceManager.Core.Library</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Windows">
+        <ID>Microsoft.Windows.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <ModuleTypes>
+      <WriteActionModuleType ID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39.MT" Accessibility="Public" RunAs="Core!Microsoft.SystemCenter.ServiceManager.WorkflowAccount" Batching="false">
+        <Configuration>
+          <IncludeSchemaTypes>
+            <SchemaType>Windows!Microsoft.Windows.PowerShellSchema</SchemaType>
+          </IncludeSchemaTypes>
+        </Configuration>
+        <ModuleImplementation Isolation="Any">
+          <Composite>
+            <MemberModules>
+              <WriteAction ID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39.PSWA" TypeID="Windows!Microsoft.Windows.PowerShellWriteAction">
+                <ScriptName>DoWork.ps1</ScriptName>
+                <ScriptBody>
+$enumActive = (Get-SCSMEnumeration ActivityStatusEnum.Active$).Id
+$enumOnHold = (Get-SCSMEnumeration ActivityStatusEnum.OnHold$).Id
+$enumCompleted = (Get-SCSMEnumeration ActivityStatusEnum.Completed$).Id
+
+$ActiveTimers = get-scsmobject -class(get-scsmclass -name timer_Activity) -filter "Status -eq $enumActive -or Status -eq $enumOnHold"
+
+Try {
+    ForEach ($Activity in $ActiveTimers) {
+        If ((Get-Date) -gt $Activity.ScheduledEndTime) {
+            $ActivityHash = @{"Status" = $enumCompleted}
+            Set-SCSMObject -SMObject $Activity -PropertyHashTable $ActivityHash
+        }
+    }
+}
+Catch{
+    out-file "C:\temp\timererror.log" -InputObject $_.exception.message -append
+}</ScriptBody>
+                <SnapIns></SnapIns>
+                <Parameters></Parameters>
+                <TimeoutSeconds>300</TimeoutSeconds>
+                <StrictErrorHandling>true</StrictErrorHandling>
+                <SerializationDepth>3</SerializationDepth>
+              </WriteAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39.PSWA" />
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <InputType>System!System.BaseData</InputType>
+      </WriteActionModuleType>
+    </ModuleTypes>
+  </TypeDefinitions>
+  <Categories>
+    <Category ID="Custom.Cireson.TimerActivity.Workflow.Category" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.ManagementPack">
+      <ManagementPackName>Custom.Cireson.TimerActivity.Workflow</ManagementPackName>
+      <ManagementPackVersion>1.0.0.0</ManagementPackVersion>
+    </Category>
+    <Category ID="Timer_Activity_WorkflowCategory" Target="Timer_Activity_Workflow" Value="EnterpriseManagement!Microsoft.EnterpriseManagement.ServiceManager.Rules.WorkflowSubscriptions" />
+  </Categories>
+  <Monitoring>
+    <Rules>
+      <Rule ID="Timer_Activity_Workflow" Enabled="true" Target="SystemCenter!Microsoft.SystemCenter.SubscriptionWorkflowTarget" ConfirmDelivery="false" Remotable="true" Priority="Normal" DiscardLevel="100">
+        <Category>Notification</Category>
+        <DataSources>
+          <DataSource ID="SchedulerDS" RunAs="SystemCenter!Microsoft.SystemCenter.DatabaseWriteActionAccount" TypeID="System!System.Scheduler">
+            <Scheduler>
+              <SimpleReccuringSchedule>
+                <Interval Unit="Minutes">10</Interval>
+              </SimpleReccuringSchedule>
+              <ExcludeDates />
+            </Scheduler>
+          </DataSource>
+        </DataSources>
+        <WriteActions>
+          <WriteAction ID="WA" TypeID="SystemCenter1!Microsoft.EnterpriseManagement.SystemCenter.Subscription.WindowsWorkflowTaskWriteAction">
+            <Subscription>
+              <WindowsWorkflowConfiguration>
+                <AssemblyName>Timer_Activity_Workflow</AssemblyName>
+                <WorkflowTypeName>WorkflowAuthoring.Timer_Activity_Workflow</WorkflowTypeName>
+                <WorkflowParameters></WorkflowParameters>
+                <RetryExceptions></RetryExceptions>
+                <RetryDelaySeconds>60</RetryDelaySeconds>
+                <MaximumRunningTimeSeconds>120</MaximumRunningTimeSeconds>
+              </WindowsWorkflowConfiguration>
+            </Subscription>
+          </WriteAction>
+        </WriteActions>
+      </Rule>
+    </Rules>
+    <Tasks>
+      <Task ID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39" Accessibility="Public" Enabled="true" Target="Windows!Microsoft.Windows.Computer" Timeout="300" Remotable="true">
+        <Category>Notification</Category>
+        <WriteAction ID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39.WA" TypeID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39.MT" />
+      </Task>
+    </Tasks>
+  </Monitoring>
+  <LanguagePacks>
+    <LanguagePack ID="ENA" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Custom.Cireson.TimerActivity.Workflow">
+          <Name>Custom.Cireson.TimerActivity.Workflow</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+    <LanguagePack ID="ENU" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="Custom.Cireson.TimerActivity.Workflow">
+          <Name>Custom.Cireson.TimerActivity.Workflow</Name>
+        </DisplayString>
+        <DisplayString ElementID="Timer_Activity_Workflow">
+          <Name>Timer_Activity_Workflow</Name>
+          <Description>This workflow looks for Timer Activities that have expired and sets their status to completed.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Timer_Activity_Workflow" SubElementID="WA">
+          <Name>This workflow looks for Timer Activities that have expired and sets their status to completed.</Name>
+          <Description>This workflow looks for Timer Activities that have expired and sets their status to completed.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39">
+          <Name>Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>

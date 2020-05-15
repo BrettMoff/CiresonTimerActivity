@@ -1,0 +1,450 @@
+﻿<ManagementPack ContentReadable="true" SchemaVersion="2.0" OriginalSchemaVersion="1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <Manifest>
+    <Identity>
+      <ID>Custom.Cireson.TimerActivity</ID>
+      <Version>1.1.0.5</Version>
+    </Identity>
+    <Name>Custom.Cireson.TimerActivity</Name>
+    <References>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Console">
+        <ID>Microsoft.EnterpriseManagement.ServiceManager.UI.Console</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Alias_a11fe057_3313_4383_b05c_31765403f352">
+        <ID>System.WorkItem.Activity.Library</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="EnterpriseManagement">
+        <ID>Microsoft.EnterpriseManagement.ServiceManager.UI.Administration</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SystemCenter">
+        <ID>Microsoft.SystemCenter.Library</ID>
+        <Version>7.0.8437.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="SystemCenter1">
+        <ID>Microsoft.SystemCenter.Subscriptions</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Alias_4fbd0eac_b4f5_480b_8946_b528b46172de">
+        <ID>Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Alias_5dc53f6b_8d3a_4ca9_8321_25c28a90f0bc">
+        <ID>Microsoft.EnterpriseManagement.ServiceManager.Authoring.Forms</ID>
+        <Version>7.7.16.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="Timer_Activity" Accessibility="Public" Abstract="false" Base="Alias_a11fe057_3313_4383_b05c_31765403f352!System.WorkItem.Activity" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="Property_33" Type="int" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="TimeDelayType_Enum" Type="enum" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" EnumType="TimeDelayType_Enum" />
+        </ClassType>
+      </ClassTypes>
+      <EnumerationTypes>
+        <EnumerationValue ID="TimeDelayType_Enum" Accessibility="Public" />
+        <EnumerationValue ID="Enum.42dd0218ca9d4b249a26d74b823b3d30" Accessibility="Public" Parent="TimeDelayType_Enum" Ordinal="0" />
+        <EnumerationValue ID="Enum.e52eb579fb18470295788cc259fdbfe2" Accessibility="Public" Parent="TimeDelayType_Enum" Ordinal="1" />
+        <EnumerationValue ID="Enum.0dbece56aed44f348ef18763fdb29483" Accessibility="Public" Parent="TimeDelayType_Enum" Ordinal="2" />
+        <EnumerationValue ID="Enum.eaa5ba70e1db4d0696e92b3982887c48" Accessibility="Public" Parent="TimeDelayType_Enum" Ordinal="3" />
+        <EnumerationValue ID="Enum.717323a079844444b535bae12ad2d345" Accessibility="Public" Parent="TimeDelayType_Enum" Ordinal="4" />
+      </EnumerationTypes>
+    </EntityTypes>
+  </TypeDefinitions>
+  <Categories>
+    <Category ID="Custom.Cireson.TimerActivity.Category" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.ManagementPack">
+      <ManagementPackName>Custom.Cireson.TimerActivity</ManagementPackName>
+      <ManagementPackVersion>1.0.0.0</ManagementPackVersion>
+    </Category>
+    <Category ID="CategoryId_37b2752b_9bee_4936_a9d9_53febbc92514" Target="TimeDelayType_Enum" Value="Alias_4fbd0eac_b4f5_480b_8946_b528b46172de!Microsoft.EnterpriseManagement.ServiceManager.UI.Authoring.EnumerationViewTasks" />
+    <Category ID="CategoryId_78f72d0d_2051_4076_b6b6_e04fe308589c" Target="TimeDelayType_Enum" Value="System!VisibleToUser" />
+  </Categories>
+  <Templates>
+    <ObjectTemplate ID="Template.6bb4cf39006548f4b46dafcb1aad034f" TypeID="Timer_Activity">
+      <Property Path="$Context/Property[Type='Alias_a11fe057_3313_4383_b05c_31765403f352!System.WorkItem.Activity']/Skip$">False</Property>
+    </ObjectTemplate>
+  </Templates>
+  <Presentation>
+    <Forms>
+      <Form ID="TimerActivity_Form" Accessibility="Public" Target="Alias_a11fe057_3313_4383_b05c_31765403f352!System.WorkItem.Activity" Assembly="Alias_5dc53f6b_8d3a_4ca9_8321_25c28a90f0bc!AuthoringFormsAssembly" TypeName="Microsoft.EnterpriseManagement.ServiceManager.Authoring.Forms.EmptyForm">
+        <Category>Form</Category>
+        <Customization>
+          <AddControl Parent="DockPanel_0" Assembly="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="System.Windows.Controls.Label" Left="133.5" Top="24" Right="386" Bottom="0" Row="0" Column="0" />
+          <PropertyChange Object="Label_1" Property="HorizontalAlignment">
+            <NewValue>Left</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="Margin">
+            <NewValue>133.5,24,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="VerticalAlignment">
+            <NewValue>Bottom</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="Margin">
+            <NewValue>133.5,0,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="Margin">
+            <NewValue>0,0,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="VerticalAlignment">
+            <NewValue>Center</NewValue>
+          </PropertyChange>
+          <PropertyBindingChange Object="Label_1" Property="Content">
+            <NewBinding Enabled="False" />
+          </PropertyBindingChange>
+          <PropertyChange Object="Label_1" Property="Content">
+            <NewValue>Timer Activity</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="FontSize">
+            <NewValue>20</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="FontWeight">
+            <NewValue>Bold</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="FontSize">
+            <NewValue>20.25</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="Width">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="Height">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <AddControl Parent="Grid_1" Assembly="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="System.Windows.Controls.Label" Left="178.5" Top="99" Right="341" Bottom="676" Row="0" Column="0" />
+          <PropertyChange Object="Label_2" Property="HorizontalAlignment">
+            <NewValue>Left</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_2" Property="Margin">
+            <NewValue>178.5,99,0,676</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_2" Property="VerticalAlignment">
+            <NewValue>Top</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_2" Property="Margin">
+            <NewValue>178.5,99,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_2" Property="Margin">
+            <NewValue>80,99,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_2" Property="Margin">
+            <NewValue>20,99,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_2" Property="Margin">
+            <NewValue>20,20,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_2" Property="Width">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_2" Property="Height">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyBindingChange Object="Label_2" Property="Content">
+            <NewBinding Enabled="False" />
+          </PropertyBindingChange>
+          <PropertyChange Object="Label_2" Property="Content">
+            <NewValue>Date\Time to hold workflow:</NewValue>
+          </PropertyChange>
+          <AddControl Parent="Grid_1" Assembly="WPFToolkit, Version=7.0.5000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="Microsoft.Windows.Controls.DatePicker" Left="21.5" Top="56" Right="398" Bottom="722" Row="0" Column="0" />
+          <PropertyChange Object="DatePicker_1" Property="HorizontalAlignment">
+            <NewValue>Left</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="DatePicker_1" Property="Margin">
+            <NewValue>21.5,56,0,722</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="DatePicker_1" Property="VerticalAlignment">
+            <NewValue>Top</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="DatePicker_1" Property="Margin">
+            <NewValue>21.5,56,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="DatePicker_1" Property="Margin">
+            <NewValue>20,56,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="DatePicker_1" Property="Margin">
+            <NewValue>20,50,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="DatePicker_1" Property="Margin">
+            <NewValue>20,40,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_1" Property="MinHeight">
+            <NewValue>100</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_1" Property="Height">
+            <NewValue>100</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ScrollViewer_0" Property="Height">
+            <NewValue>100</NewValue>
+          </PropertyChange>
+          <Move X="0" Y="350">
+            <Element Name="ScrollViewer_0" />
+          </Move>
+          <PropertyChange Object="ScrollViewer_0" Property="Height">
+            <NewValue>200</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ScrollViewer_0" Property="Margin">
+            <NewValue>0,0,0,350</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_0" Property="Height">
+            <NewValue>200</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_0" Property="Margin">
+            <NewValue>0,0,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Index:0/Index:0" Property="Height">
+            <NewValue>200</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Index:0/Index:0" Property="Height">
+            <NewValue>300</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ScrollViewer_0" Property="Margin">
+            <NewValue>0,0,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_1" Property="VerticalAlignment">
+            <NewValue>Top</NewValue>
+          </PropertyChange>
+          <PropertyBindingChange Object="DatePicker_1" Property="SelectedDate">
+            <NewBinding Enabled="True" Path="ScheduledEndDate" Mode="TwoWay" BindsDirectlyToSource="False" UpdateSourceTrigger="Default" />
+          </PropertyBindingChange>
+          <PropertyChange Object="DatePicker_1" Property="SelectedDateFormat">
+            <NewValue>FullDateTime</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="DatePicker_1" Property="Width">
+            <NewValue>280</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Index:0/Index:0" Property="Height">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ScrollViewer_0" Property="Height">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ScrollViewer_0" Property="VerticalAlignment">
+            <NewValue>Top</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_0" Property="Height">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_1" Property="Height">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_1" Property="VerticalAlignment">
+            <NewValue>Stretch</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_1" Property="MinHeight">
+            <NewValue>0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_1" Property="MinWidth">
+            <NewValue>0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Grid_1" Property="MinHeight">
+            <NewValue>800</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_1" Property="Margin">
+            <NewValue>20,0,0,0</NewValue>
+          </PropertyChange>
+          <AddControl Parent="Grid_1" Assembly="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="System.Windows.Controls.Label" Left="27.5" Top="80" Right="492" Bottom="695" Row="0" Column="0" />
+          <PropertyChange Object="Label_3" Property="HorizontalAlignment">
+            <NewValue>Left</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_3" Property="Margin">
+            <NewValue>27.5,80,0,695</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_3" Property="VerticalAlignment">
+            <NewValue>Top</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_3" Property="Margin">
+            <NewValue>27.5,80,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_3" Property="Margin">
+            <NewValue>20,80,0,0</NewValue>
+          </PropertyChange>
+          <AddControl Parent="Grid_1" Assembly="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="System.Windows.Controls.TextBox" Left="20.5" Top="108" Right="499" Bottom="667" Row="0" Column="0" />
+          <PropertyChange Object="TextBox_1" Property="HorizontalAlignment">
+            <NewValue>Left</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="TextBox_1" Property="Margin">
+            <NewValue>20.5,108,0,667</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="TextBox_1" Property="VerticalAlignment">
+            <NewValue>Top</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="TextBox_1" Property="Margin">
+            <NewValue>20.5,108,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="TextBox_1" Property="Margin">
+            <NewValue>20.5,100,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="TextBox_1" Property="Margin">
+            <NewValue>20,100,0,0</NewValue>
+          </PropertyChange>
+          <PropertyBindingChange Object="Label_3" Property="Content">
+            <NewBinding Enabled="False" />
+          </PropertyBindingChange>
+          <PropertyChange Object="Label_3" Property="Content">
+            <NewValue>Time Delay:</NewValue>
+          </PropertyChange>
+          <AddControl Parent="Grid_1" Assembly="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="System.Windows.Controls.Label" Left="156.5" Top="92" Right="363" Bottom="683" Row="0" Column="0" />
+          <PropertyChange Object="Label_4" Property="HorizontalAlignment">
+            <NewValue>Left</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_4" Property="Margin">
+            <NewValue>156.5,92,0,683</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_4" Property="VerticalAlignment">
+            <NewValue>Top</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_4" Property="Margin">
+            <NewValue>156.5,92,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_4" Property="Margin">
+            <NewValue>156.5,100,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_4" Property="Margin">
+            <NewValue>150,100,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_4" Property="Margin">
+            <NewValue>150,80,0,0</NewValue>
+          </PropertyChange>
+          <AddControl Parent="Grid_1" Assembly="Microsoft.EnterpriseManagement.UI.SdkDataAccess, Version=7.0.5000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="Microsoft.EnterpriseManagement.UI.WpfControls.ListPicker" Left="150.5" Top="107" Right="269" Bottom="671" Row="0" Column="0" />
+          <PropertyChange Object="ListPicker_1" Property="Width">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="VerticalAlignment">
+            <NewValue>Top</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="Margin">
+            <NewValue>150.5,107,269,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="Margin">
+            <NewValue>150,107,269,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="Margin">
+            <NewValue>150,100,269,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="ParentCategoryId">
+            <NewValue>621d4c93-23ed-f941-f3d9-5d1a54f5cc0f</NewValue>
+          </PropertyChange>
+          <PropertyBindingChange Object="Label_4" Property="Content">
+            <NewBinding Enabled="False" />
+          </PropertyBindingChange>
+          <PropertyChange Object="Label_4" Property="Content">
+            <NewValue>Time Delay Units:</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_4" Property="Width">
+            <NewValue>Auto</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="Margin">
+            <NewValue>125,100,269,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="Margin">
+            <NewValue>120,100,269,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="Label_4" Property="Margin">
+            <NewValue>120,80,0,0</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="MinWidth">
+            <NewValue>120</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="Width">
+            <NewValue>120</NewValue>
+          </PropertyChange>
+          <PropertyChange Object="ListPicker_1" Property="HorizontalAlignment">
+            <NewValue>Left</NewValue>
+          </PropertyChange>
+          <PropertyBindingChange Object="TextBox_1" Property="Text">
+            <NewBinding Enabled="False" />
+          </PropertyBindingChange>
+          <PropertyChange Object="TextBox_1" Property="Text">
+            <NewValue />
+          </PropertyChange>
+        </Customization>
+      </Form>
+    </Forms>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENA" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="Custom.Cireson.TimerActivity">
+          <Name>Custom.Cireson.TimerActivity</Name>
+        </DisplayString>
+        <DisplayString ElementID="Template.6bb4cf39006548f4b46dafcb1aad034f">
+          <Name>Timer Activity</Name>
+          <Description>Workflow activity that will not progress until a set time is reached</Description>
+        </DisplayString>
+        <DisplayString ElementID="Enum.42dd0218ca9d4b249a26d74b823b3d30">
+          <Name>Minutes</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.e52eb579fb18470295788cc259fdbfe2">
+          <Name>Hours</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.0dbece56aed44f348ef18763fdb29483">
+          <Name>Days</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.eaa5ba70e1db4d0696e92b3982887c48">
+          <Name>Weeks</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.717323a079844444b535bae12ad2d345">
+          <Name>Months</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+    <LanguagePack ID="ENU" IsDefault="false">
+      <DisplayStrings>
+        <DisplayString ElementID="Custom.Cireson.TimerActivity">
+          <Name>Custom.Cireson.TimerActivity</Name>
+        </DisplayString>
+        <DisplayString ElementID="Timer_Activity">
+          <Name>Timer Activity</Name>
+          <Description>Specify your class description.</Description>
+        </DisplayString>
+        <DisplayString ElementID="Timer_Activity" SubElementID="Property_33">
+          <Name>Time Delay</Name>
+          <Description>The amount of time to delay before proceeding</Description>
+        </DisplayString>
+        <DisplayString ElementID="Timer_Activity" SubElementID="TimeDelayType_Enum">
+          <Name>TimeDelayType_Enum</Name>
+        </DisplayString>
+        <DisplayString ElementID="TimerActivity_Form">
+          <Name>TimerActivity_Form</Name>
+          <Description>Specify your form description.</Description>
+        </DisplayString>
+        <DisplayString ElementID="TimeDelayType_Enum">
+          <Name>Time Delay Units</Name>
+          <Description>The units of time to set the Timer Activity (Minutes, Hours, Days, Months)</Description>
+        </DisplayString>
+        <DisplayString ElementID="Template.6bb4cf39006548f4b46dafcb1aad034f">
+          <Name>Timer Activity</Name>
+          <Description>Workflow activity that will not progress until a set time is reached</Description>
+        </DisplayString>
+        <DisplayString ElementID="Enum.42dd0218ca9d4b249a26d74b823b3d30">
+          <Name>Minutes</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.e52eb579fb18470295788cc259fdbfe2">
+          <Name>Hours</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.0dbece56aed44f348ef18763fdb29483">
+          <Name>Days</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.eaa5ba70e1db4d0696e92b3982887c48">
+          <Name>Weeks</Name>
+        </DisplayString>
+        <DisplayString ElementID="Enum.717323a079844444b535bae12ad2d345">
+          <Name>Months</Name>
+        </DisplayString>
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>
