@@ -21,7 +21,6 @@ namespace CiresonTimerActivity.WPF
 
         public CiresonTimerActivityViewModel(IDataItem dataItem)
         {
-            //TODO: license check.
             //Set this idataitem equal to what SCSM set it to. 
             _dataItem = dataItem;
             LoadFormData(dataItem);
@@ -29,7 +28,7 @@ namespace CiresonTimerActivity.WPF
 
         public CiresonTimerActivityViewModel(EnterpriseManagementObject emoActivity)
         {
-            //As soon as we load, do a single quick license check, which might change the title.
+
             _emoActivity = emoActivity;
             LoadFormDataAsync(emoActivity);
         }
@@ -171,6 +170,37 @@ namespace CiresonTimerActivity.WPF
             }
         }
 
+        private bool _rdbTimeFrameTypeDuration;
+        public bool rdbTimeFrameTypeDuration
+        {
+            get
+            {
+                return this._rdbTimeFrameTypeDuration;
+            }
+            set
+            {
+                this._rdbTimeFrameTypeDuration = value;
+                string strPropertyName = "rdbTimeFrameTypeDuration";
+                RaisePropertyChanged(strPropertyName);
+                //UpdateScsmObject(strPropertyName, intTimeDelay); //not a real SCSM property. Form only.
+            }
+        }
+
+        private bool _rdbTimeFrameTypeSpecificDateTime;
+        public bool rdbTimeFrameTypeSpecificDateTime
+        {
+            get
+            {
+                return this._rdbTimeFrameTypeSpecificDateTime;
+            }
+            set
+            {
+                this._rdbTimeFrameTypeSpecificDateTime = value;
+                string strPropertyName = "rdbTimeFrameTypeSpecificDateTime";
+                RaisePropertyChanged(strPropertyName);
+                //UpdateScsmObject(strPropertyName, intTimeDelay); //not a real SCSM property. Form only.
+            }
+        }
 
 
         private string _TimeDelay; //it's actually an integer.
@@ -249,9 +279,8 @@ namespace CiresonTimerActivity.WPF
             if (_dataItem == null && _emoActivity == null)
                 throw new NullReferenceException("Both the idataitem and EnterpriseManagementObject cannot be null");
 
-            if (value == null)
-                return;
-            else if (value is string || value is int || value is Guid)
+            
+            if (value == null || value is string || value is int || value is Guid || value is DateTime)
             {
                 if (_dataItem != null)
                     _dataItem[strPropertyName] = value;
@@ -394,28 +423,67 @@ namespace CiresonTimerActivity.WPF
 
         internal bool HasValidDateInfoEntered()
         {
+            string tempstr;
+            return HasValidDateInfoEntered(out tempstr);
+        }
+
+        internal bool HasValidDateInfoEntered(out string stringError)
+        {
+
+            //bool blnCalendarDateIsValid = true, blnTimerDateIsValid = true;
+
             if (this.Status == null || this.Status.Id == Constants.guidEnum_ActivityStatusEnum_Ready)
             {
                 //it's either a new activity, or pending activity. Make sure the date doesn't occur in the past.
-                if (this.ScheduledEndDate < DateTime.Now)
-                    return false;
-
-                if (this.TimeDelay == null || Constants.regex_NumericOnly.IsMatch(this.TimeDelay) == false)
-                    return false;
-
-                if (int.Parse(this.TimeDelay) < 1)
-                    return false;
-
-                if (this.selectedDurationType == null || this.selectedDurationType.DisplayName == null)
-                    return false;
+                if (rdbTimeFrameTypeSpecificDateTime == true)
+                {
+                    if (this.ScheduledEndDate == null)
+                    {
+                        stringError = "The scheduled date must have a value.";
+                        return false;
+                    }
+                    else if (this.ScheduledEndDate < DateTime.Now)
+                    {
+                        stringError = "The scheduled date should occur in the future.";
+                        return false;
+                    }
+                    this.TimeDelay = null;
+                }
+                else if (rdbTimeFrameTypeDuration == true)
+                {
+                    if (this.TimeDelay == null || Constants.regex_NumericOnly.IsMatch(this.TimeDelay) == false)
+                    {
+                        stringError = "You must enter a number for the time duration.";
+                        return false;
+                    }
+                    else if (int.Parse(this.TimeDelay) < 1)
+                    {
+                        stringError = "The time duration must be 1 or greater.";
+                        return false;
+                    }
+                    else if (this.selectedDurationType == null || this.selectedDurationType.DisplayName == null) {
+                        stringError = "The time duration units must be selected.";
+                        return false;   
+                    }
+                    this.ScheduledEndDate = null;
+                }
             }
-
+            stringError = null;
             return true;
         }
 
 
         #region Command Methods
 
+        public ICommand CancelCommand
+        {
+            get { return new RelayCommand(CancelMethod); }
+        }
+
+        public ICommand OKCommand
+        {
+            get { return new RelayCommand(OKMethod, HasValidDateInfoEntered); }
+        }
 
         /// <summary>
         /// The user pressed the cancel button on the form.
@@ -430,13 +498,39 @@ namespace CiresonTimerActivity.WPF
             lblisGuiTestMode = "OK pressed!";
             try
             {
-                //SaveFormData();
+                SaveFormData();
             }
             catch (Exception) { throw; }
 
         }
 
 
+        /// <summary>
+        /// This only gets called in test mode, as the SCSM window would normally just save the idataitem.
+        /// </summary>
+        public void SaveFormData()
+        {
+
+            this._emoActivity[null, "Title"].Value = this.Title;
+            this._emoActivity[null, "Description"].Value = this.Description;
+
+            if (this.Status == null)
+                this._emoActivity[null, "Status"].Value = Constants.guidEnum_ActivityStatusEnum_Ready; //This is usually possible if something created an orphaned activity and didn't set a status.
+            else
+                this._emoActivity[null, "Status"].Value = this.Status.Id;
+
+            if (ScheduledEndDate != null)
+                this._emoActivity[null, "ScheduledEndDate"].Value = this.ScheduledEndDate;
+
+            if (TimeDelay != null && selectedDurationType.DisplayName != null)
+            {
+                this._emoActivity[null, "TimeDelay"].Value = this.TimeDelay;
+                this._emoActivity[null, "TimeDelayType_Enum"].Value = this.selectedDurationType.Id;
+            }
+
+            this._emoActivity.Commit();
+
+        }
 
         #endregion
 

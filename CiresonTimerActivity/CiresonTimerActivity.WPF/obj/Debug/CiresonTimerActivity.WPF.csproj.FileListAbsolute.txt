@@ -46,6 +46,7 @@ Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\bin\D
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF.csprojAssemblyReference.cache
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\Views\CiresonTimerActivityUserControl.g.cs
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF_MarkupCompile.cache
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF_MarkupCompile.lref
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\Views\CiresonTimerActivityUserControl.baml
@@ -56,4 +57,3 @@ Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\D
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF.csproj.CopyComplete
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF.dll
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF.pdb
-Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\GeneratedInternalTypeHelper.g.cs

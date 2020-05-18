@@ -14,6 +14,6 @@ namespace CiresonTimerActivity.WPF
 
         public static readonly Guid guidEnum_ActivityStatusEnum_Ready = new Guid("50c667cf-84e5-97f8-f6f8-d8acd99f181c"); //ActivityStatusEnum.Ready
 
-        public static System.Text.RegularExpressions.Regex regex_NumericOnly = new System.Text.RegularExpressions.Regex("[^0-9]"); //regex that only allows numbers
+        public static System.Text.RegularExpressions.Regex regex_NumericOnly = new System.Text.RegularExpressions.Regex("^[0-9]*$"); //regex that only allows numbers
     }
 }

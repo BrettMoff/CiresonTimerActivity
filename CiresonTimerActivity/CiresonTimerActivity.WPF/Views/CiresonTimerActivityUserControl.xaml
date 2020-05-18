@@ -51,7 +51,6 @@
             </ResourceDictionary>
         </Grid.Resources>
 
-
         <Grid.RowDefinitions>
             <RowDefinition Name="gridRowBanner" Height="66" />
             <RowDefinition Name="gridRowFormContent" />
@@ -159,45 +158,58 @@
                             </Label>
 
 
+                            <StackPanel x:Name="panelTimeControls">
 
-                            <RadioButton GroupName="TimeFrameType" x:Name="rdbTimeFrameTypeSpecificDateTime">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Label x:Name="lblTimeFrameTypeSpecificDateTime">Specified Date And Time</Label>
-                                    <Border Width="350px">
-                                        <wpfTool:DateTimePicker x:Name="dateScheduledEndDate" Format="FullDateTime" CalendarWidth="350" IsEnabled="{Binding IsChecked, ElementName=rdbTimeFrameTypeSpecificDateTime}">
-                                            <wpfTool:DateTimePicker.Value >
-                                                <Binding Path="ScheduledEndDate" Mode="TwoWay" UpdateSourceTrigger="Default">
-                                                    <Binding.ValidationRules>
-                                                        <validation:ValidDateTimeSelection />
-                                                    </Binding.ValidationRules>
-                                                </Binding>
-                                            </wpfTool:DateTimePicker.Value>
-                                        </wpfTool:DateTimePicker>
-                                    </Border>
-                                </StackPanel>
-                            </RadioButton>
-                            
-                            <RadioButton GroupName="TimeFrameType" x:Name="rdbTimeFrameTypeDuration">
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Label x:Name="lblTimeFrameTypeDuration">Time Duration</Label>
-
-                                    <TextBox x:Name="txtDurationUnits" IsEnabled="{Binding IsChecked, ElementName=rdbTimeFrameTypeDuration}" Text="{Binding TimeDelay}" Height="25px"></TextBox>
-                                    <ComboBox x:Name="txtDurationEnum" 
-                                        
-                                        IsEnabled="{Binding IsChecked, ElementName=rdbTimeFrameTypeDuration}" 
-                                        ItemsSource="{Binding DurationEnumSource, Mode=OneWay}" 
-                                        DisplayMemberPath="DisplayName" 
-                                        SelectedValue="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}"
-                                        SelectedValuePath="DisplayName"
-                                        IsEditable="false"
-                                    >
-                                        
-                                    </ComboBox>
-                                </StackPanel>
-                            </RadioButton>
+                                <StackPanel.BindingGroup>
+                                    <BindingGroup NotifyOnValidationError="True" x:Name="bindingGroupTimeFrame" >
+                                        <BindingGroup.ValidationRules>
+                                            <local:ValidDateTimeSelection ValidationStep="UpdatedValue"/>
+                                        </BindingGroup.ValidationRules>
+                                    </BindingGroup>
+                                </StackPanel.BindingGroup>
 
 
-                            
+                                <RadioButton GroupName="TimeFrameType" x:Name="rdbTimeFrameTypeSpecificDateTime" IsChecked="{Binding Path=rdbTimeFrameTypeSpecificDateTime}" Margin="3,0,0,3">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" x:Name="panelTimeFrameSpecificDateTime">
+                                        <Label x:Name="lblTimeFrameTypeSpecificDateTime">Specified Date And Time</Label>
+                                        <Border Width="350px" x:Name="borderTimeFrameSpecificDateTime">
+                                            <wpfTool:DateTimePicker x:Name="dateScheduledEndDate" 
+                                                                    Format="FullDateTime" 
+                                                                    CalendarWidth="350" 
+                                                                    AutoCloseCalendar="True"
+                                                                    IsEnabled="{Binding IsChecked, ElementName=rdbTimeFrameTypeSpecificDateTime}"
+                                                                    Value="{Binding Path=ScheduledEndDate, ValidatesOnDataErrors=true}">
+                                                
+                                            </wpfTool:DateTimePicker>
+                                        </Border>
+                                    </StackPanel>
+                                </RadioButton>
+
+                                <RadioButton GroupName="TimeFrameType" x:Name="rdbTimeFrameTypeDuration" IsChecked="{Binding Path=rdbTimeFrameTypeDuration}" Margin="3,0,0,0">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" x:Name="panelTimeFrameDuration">
+                                        <Label x:Name="lblTimeFrameTypeDuration">Time Duration</Label>
+
+                                        <TextBox x:Name="txtDurationUnits" IsEnabled="{Binding IsChecked, 
+                                                ElementName=rdbTimeFrameTypeDuration}" 
+                                                 Text="{Binding TimeDelay, ValidatesOnDataErrors=true}" 
+                                                 Height="25px"></TextBox>
+                                        <ComboBox x:Name="cbxDurationEnum" 
+                                            SelectedItem="{Binding selectedDurationType}" 
+                                            IsEnabled="{Binding IsChecked, ElementName=rdbTimeFrameTypeDuration}" 
+                                            ItemsSource="{Binding timeDurationTypeSource, Mode=OneWay}" 
+                                            DisplayMemberPath="DisplayName" 
+                                            SelectedValue="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text}"
+                                            SelectedValuePath="DisplayName"
+                                            IsEditable="false"
+                                        />
+
+
+                                    </StackPanel>
+                                </RadioButton>
+
+                            </StackPanel>
+
+                            <Label x:Name="lblTimeControlsError" Foreground="Red" Margin="3,0,0,3" Content="{Binding ElementName=panelTimeControls, Path=(Validation.Errors)[0].ErrorContent}" />
                             
                         </StackPanel>
                         <StackPanel Margin="5,5,5,5" Grid.ColumnSpan="1" Grid.Row="4" Grid.Column="1">
@@ -206,18 +218,8 @@
 
 
                             <StackPanel x:Name="paneltestconfirmation" Margin="0" Visibility="Hidden">
-                                <Button x:Name="btnOk" Margin="5" Command="{Binding OKCommand}" >
-                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type views:FormView}}" 
-                                    Path="Strings[Ok].Value" 
-                                    FallbackValue="[OK]">
-                                    </Binding>
-                                </Button>
-                                <Button x:Name="btnCancel" Margin="5" Command="{Binding CancelCommand}">
-                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type views:FormView}}" 
-                                    Path="Strings[Cancel].Value" 
-                                    FallbackValue="[Cancel]">
-                                    </Binding>
-                                </Button>
+                                <Button x:Name="btnOk" Margin="5" Command="{Binding OKCommand}" >OK</Button>
+                                <Button x:Name="btnCancel" Margin="5" Command="{Binding CancelCommand}">Cancel</Button>
                                 <Label x:Name="lblisGuiTestMode" >
                                     <Label.Content>
                                         <Binding Path="lblisGuiTestMode" Mode="TwoWay" UpdateSourceTrigger="Default" />

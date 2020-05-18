@@ -152,6 +152,7 @@
   <ItemGroup>
     <Compile Include="Classes\Common.cs" />
     <Compile Include="Classes\Constants.cs" />
+    <Compile Include="Classes\RelayCommand.cs" />
     <Compile Include="Classes\ValidationRules.cs" />
     <Compile Include="ViewModels\CiresonTimerActivityViewModel.cs" />
     <Compile Include="Views\CiresonTimerActivityUserControl.xaml.cs">

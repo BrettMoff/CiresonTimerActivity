@@ -27,7 +27,6 @@ namespace CiresonTimerActivity.WPF
     {
 
         public  CiresonTimerActivityViewModel activityViewModel; //null to start
-        private System.Windows.Threading.DispatcherTimer notifcationTemplateTimer;
 
         private RelatedItemsPane relatedItemsPane;
         public bool _isTemplateMode = false; //This form was actually opened as a template, not a real work item
@@ -36,8 +35,11 @@ namespace CiresonTimerActivity.WPF
         {
             InitializeComponent();
 
-
             AddEventHanders();
+
+            AddFormControls();
+
+            
 
         }
 
@@ -46,9 +48,37 @@ namespace CiresonTimerActivity.WPF
             this.lblTimeFrameTypeDuration.PreviewMouseDown += lblTimeFrameTypeDuration_PreviewMouseDown;
             this.lblTimeFrameTypeSpecificDateTime.PreviewMouseDown += lblTimeFrameTypeSpecificDateTime_PreviewMouseDown;
 
+            this.panelTimeControls.LostFocus += TimeControls_LostFocus;
+
             //For loaded and data context changed events
             this.DataContextChanged += UserControl_DataContextChanged;
+        }
 
+
+        private void TimeControls_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (rdbTimeFrameTypeSpecificDateTime.IsChecked == true)
+            {
+                //The radio button changed. See if any of the child controls contain the access
+                if (rdbTimeFrameTypeSpecificDateTime.IsFocused || panelTimeFrameSpecificDateTime.IsFocused || lblTimeFrameTypeSpecificDateTime.IsFocused || borderTimeFrameSpecificDateTime.IsFocused || dateScheduledEndDate.IsFocused)
+                    return;
+            }
+            else if (rdbTimeFrameTypeDuration.IsChecked == true)
+            {
+                //The parent radio button control prolly lost focus to one of the child controls
+                if (rdbTimeFrameTypeDuration.IsFocused || panelTimeFrameDuration.IsFocused || lblTimeFrameTypeDuration.IsFocused || txtDurationUnits.IsFocused || cbxDurationEnum.IsFocused)
+                    return;
+            }
+            
+            bindingGroupTimeFrame.CommitEdit();
+
+        }
+
+
+        private void AddFormControls()
+        {
+            this.relatedItemsPane = new RelatedItemsPane(new WorkItemRelatedItemsConfiguration("RelatedWorkItem", "RelatedWorkItemSource", "RelatedConfigItem", "RelatedKnowledge", "FileAttachment"));
+            this.tabRelatedItems.Content = this.relatedItemsPane;
         }
 
 

@@ -4,4 +4,3 @@ Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\b
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.csproj.CoreCompileInputs.cache
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.dll
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.pdb
-Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.csprojAssemblyReference.cache
