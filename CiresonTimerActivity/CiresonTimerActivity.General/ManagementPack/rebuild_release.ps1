@@ -31,10 +31,16 @@ if (Test-Path -Path ".\Xceed.Wpf.Toolkit.dll") {
     Write-Host "Copying Xceed.Wpf.Toolkit.DLL..."
     xcopy /y "..\..\CiresonTimerActivity.WPF\bin\Debug\Xceed.Wpf.Toolkit.dll" .
     }
+else {
+    Write-Host "Can not find Xceed.Wpf.Toolkit DLL."
+    }
 
 if (Test-Path -Path "..\..\CiresonTimerActivity.WPF\bin\Debug\CiresonTimerActivity.WPF.dll") {
     Write-Host "Copying CiresonTimerActivity.WPF.dll..."
     xcopy /y "..\..\CiresonTimerActivity.WPF\bin\Debug\CiresonTimerActivity.WPF.dll" .
+    }
+else {
+    Write-Host "Can not find CiresonTimerActivity.WPF.dll DLL."
     }
 
 
