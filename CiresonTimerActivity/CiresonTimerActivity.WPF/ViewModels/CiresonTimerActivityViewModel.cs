@@ -162,17 +162,22 @@ namespace CiresonTimerActivity.WPF
         }
 
 
-        private DateTime _ActivityCreatedDate;
-        public DateTime ActivityCreatedDate
+        private DateTime _TimeAdded;
+        public DateTime TimeAdded
         {
             get
             {
-                return this._ActivityCreatedDate;
+                return this._TimeAdded;
             }
             set
             {
-                if (this._ActivityCreatedDate != value)
-                    this._ActivityCreatedDate = value;
+                if (this._TimeAdded != value)
+                {
+                    this._TimeAdded = value;
+                    string strPropertyName = "TimeAdded";
+                    RaisePropertyChanged(strPropertyName);
+                    //UpdateScsmObject(strPropertyName, value); //This TimeAdded property is read-only.
+                }
             }
         }
 
@@ -339,7 +344,7 @@ namespace CiresonTimerActivity.WPF
             if (this.Status == null && _isTemplateMode == false)
                 this.Status = Common.GetEnumerationFromGuid(Constants.guidEnum_ActivityStatusEnum_Ready);
 
-            this.ActivityCreatedDate = emoActivity.TimeAdded;
+            this.TimeAdded = emoActivity.TimeAdded.ToLocalTime();
 
             this.ScheduledEndDate = GetDateTimeFromEmoProperty(emoActivity, "ScheduledEndDate"); //converts a date to a string, if the date exists.
             this.TimeDelay = GetValueFromEmoProperty(emoActivity, "TimeDelay");

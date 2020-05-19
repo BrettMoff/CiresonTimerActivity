@@ -101,7 +101,7 @@
                    Created on
                 </TextBlock.Text>
             </TextBlock>
-            <TextBlock  Name="textCreatedOn" Grid.Row="0" Grid.Column="4" VerticalAlignment="Bottom" TextBlock.Foreground="{DynamicResource ActivityBrown}" Style="{DynamicResource ActivityMgmt_BannerPlainTextblockStyle}" Text="{Binding ActivityCreatedDate}" />
+            <TextBlock  Name="textCreatedOn" Grid.Row="0" Grid.Column="4" VerticalAlignment="Bottom" TextBlock.Foreground="{DynamicResource ActivityBrown}" Style="{DynamicResource ActivityMgmt_BannerPlainTextblockStyle}" Text="{Binding TimeAdded}" />
         </Grid>
 
         <TabControl Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" MinWidth="400" Name="tabControl">

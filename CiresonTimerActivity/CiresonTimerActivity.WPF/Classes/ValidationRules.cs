@@ -67,8 +67,6 @@ namespace CiresonTimerActivity.WPF
                 if (value == null)
                     return new ValidationResult(false, "You must enter a non-empty value");
 
-                string strValue = null;
-
                 
                 if (value is BindingGroup) //Since our XAML has ValidationStep="UpdatedValue" />, then our value is now of type BindingExpression, not the normal string that we expected.
                 {
@@ -86,28 +84,9 @@ namespace CiresonTimerActivity.WPF
                         return new ValidationResult(false, strError);
                     }
                 }
-                /*
-                else if (value is BindingExpression) //Since our XAML has ValidationStep="UpdatedValue" />, then our value is now of type BindingExpression, not the normal string that we expected.
-                {
-                    //BindingExpression be = value as BindingExpression;
-                    return new ValidationResult(false, "Was not expecting a BindingExpression here...");
-                }
-                else if (value is string)
-                {
-                    return new ValidationResult(false, "Was not expecting a string here...");
-                }
-                else if (value is DateTime)
-                {
-                    return new ValidationResult(false, "Was not expecting a DateTime here...");
-                }
-                */
-                else
-                {
-                    return new ValidationResult(false, "Was not expecting this obejct here...");
-                }
+                
 
-
-                return ValidationResult.ValidResult;
+                return new ValidationResult(false, "Was not expecting this obejct here...");
 
             }
             catch
