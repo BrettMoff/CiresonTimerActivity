@@ -31,3 +31,17 @@ Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\obj\Debug\CiresonTimerActivity.Workflow.csproj.CopyComplete
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\obj\Debug\CiresonTimerActivity.Workflow.dll
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\obj\Debug\CiresonTimerActivity.Workflow.pdb
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\CiresonTimerActivity.Workflow.dll.config
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\CiresonTimerActivity.Workflow.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\CiresonTimerActivity.Workflow.pdb
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\Microsoft.ReportViewer.Common.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\Microsoft.Build.Utilities.v3.5.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\ADODB.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\Microsoft.ReportViewer.WinForms.xml
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\bin\Debug\Microsoft.Build.Utilities.v3.5.xml
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\obj\Debug\CiresonTimerActivity.Workflow.csprojAssemblyReference.cache
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\obj\Debug\CiresonTimerActivity.Workflow.csproj.CoreCompileInputs.cache
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\obj\Debug\CiresonTimerActivity.Workflow.csproj.CopyComplete
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\obj\Debug\CiresonTimerActivity.Workflow.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.Workflow\obj\Debug\CiresonTimerActivity.Workflow.pdb

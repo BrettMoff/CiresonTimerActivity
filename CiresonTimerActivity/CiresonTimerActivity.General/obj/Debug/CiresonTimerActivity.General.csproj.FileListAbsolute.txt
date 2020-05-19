@@ -5,3 +5,10 @@ Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\o
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.dll
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.pdb
 Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.csprojAssemblyReference.cache
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\bin\Debug\CiresonTimerActivity.General.dll.config
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\bin\Debug\CiresonTimerActivity.General.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\bin\Debug\CiresonTimerActivity.General.pdb
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.csprojAssemblyReference.cache
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.csproj.CoreCompileInputs.cache
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.pdb
