@@ -21,14 +21,22 @@ if (Test-Path -Path ".\CiresonTimerActivity.WPF.dll") {
     DEL ".\CiresonTimerActivity.WPF.dll"
 }
 
-if (Test-Path -Path ".\CiresonTimerActivity.WPF.dll") {
+if (Test-Path -Path ".\Xceed.Wpf.Toolkit.dll") {
     Write-Host "Deleting Xceed.Wpf.Toolkit DLL..."
     DEL ".\Xceed.Wpf.Toolkit.dll"
 }
 
 Write-Host "Copying DLLs..."
-xcopy /y "..\..\CiresonTimerActivity.WPF\bin\Debug\CiresonTimerActivity.WPF.dll" .
-xcopy /y "..\..\CiresonTimerActivity.WPF\bin\Debug\Xceed.Wpf.Toolkit.dll" .
+if (Test-Path -Path ".\Xceed.Wpf.Toolkit.dll") {
+    Write-Host "Copying Xceed.Wpf.Toolkit.DLL..."
+    xcopy /y "..\..\CiresonTimerActivity.WPF\bin\Debug\Xceed.Wpf.Toolkit.dll" .
+    }
+
+if (Test-Path -Path "..\..\CiresonTimerActivity.WPF\bin\Debug\CiresonTimerActivity.WPF.dll") {
+    Write-Host "Copying CiresonTimerActivity.WPF.dll..."
+    xcopy /y "..\..\CiresonTimerActivity.WPF\bin\Debug\CiresonTimerActivity.WPF.dll" .
+    }
+
 
 $ErrorActionPreference = "Continue"
 #Seal the Incident MPB
