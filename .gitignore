@@ -1,1 +1,4 @@
 *.lref
+
+!ExtLibs\*.dll
+!ExtLibs\*.pdb
