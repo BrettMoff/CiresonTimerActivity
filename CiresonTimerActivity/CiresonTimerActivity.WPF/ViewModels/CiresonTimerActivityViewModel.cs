@@ -18,18 +18,22 @@ namespace CiresonTimerActivity.WPF
 
         public IDataItem _dataItem;
         public EnterpriseManagementObject _emoActivity;
+        private bool _isTemplateMode; //Disables validation
 
-        public CiresonTimerActivityViewModel(IDataItem dataItem)
+        public CiresonTimerActivityViewModel(IDataItem dataItem, bool isTemplateMode)
         {
             //Set this idataitem equal to what SCSM set it to. 
             _dataItem = dataItem;
+            this._isTemplateMode = isTemplateMode;
             LoadFormData(dataItem);
+            
         }
 
-        public CiresonTimerActivityViewModel(EnterpriseManagementObject emoActivity)
+        public CiresonTimerActivityViewModel(EnterpriseManagementObject emoActivity, bool isTemplateMode)
         {
 
             _emoActivity = emoActivity;
+            this._isTemplateMode = isTemplateMode; 
             LoadFormDataAsync(emoActivity);
         }
 
@@ -50,6 +54,8 @@ namespace CiresonTimerActivity.WPF
                     this._isGuiTestMode = value;
             }
         }
+
+
         private string _lblisGuiTestMode;
         public string lblisGuiTestMode
         {
@@ -182,6 +188,8 @@ namespace CiresonTimerActivity.WPF
                 this._rdbTimeFrameTypeDuration = value;
                 string strPropertyName = "rdbTimeFrameTypeDuration";
                 RaisePropertyChanged(strPropertyName);
+                if (_isTemplateMode && rdbTimeFrameTypeDuration == true)
+                    ScheduledEndDate = null;
                 //UpdateScsmObject(strPropertyName, intTimeDelay); //not a real SCSM property. Form only.
             }
         }
@@ -198,6 +206,11 @@ namespace CiresonTimerActivity.WPF
                 this._rdbTimeFrameTypeSpecificDateTime = value;
                 string strPropertyName = "rdbTimeFrameTypeSpecificDateTime";
                 RaisePropertyChanged(strPropertyName);
+                if (_isTemplateMode && rdbTimeFrameTypeSpecificDateTime == true)
+                {
+                    TimeDelay = null;
+                    selectedDurationType = null;
+                }
                 //UpdateScsmObject(strPropertyName, intTimeDelay); //not a real SCSM property. Form only.
             }
         }
@@ -323,16 +336,30 @@ namespace CiresonTimerActivity.WPF
             this.Description = GetValueFromEmoProperty(emoActivity, "Description");
 
             this.Status = GetEnumerationFromEmoProperty(emoActivity, "Status");
-            if (this.Status == null)
+            if (this.Status == null && _isTemplateMode == false)
                 this.Status = Common.GetEnumerationFromGuid(Constants.guidEnum_ActivityStatusEnum_Ready);
 
-            this.ScheduledEndDate = GetDateTimeFromEmoProperty(emoActivity, "ScheduledEndDate"); //converts a date to a string, if the date exists.
             this.ActivityCreatedDate = emoActivity.TimeAdded;
+
+            this.ScheduledEndDate = GetDateTimeFromEmoProperty(emoActivity, "ScheduledEndDate"); //converts a date to a string, if the date exists.
             this.TimeDelay = GetValueFromEmoProperty(emoActivity, "TimeDelay");
+
+            //Show the time information, prioritizing scheduled start date over duration.
+            if (this.ScheduledEndDate == null) {
+                rdbTimeFrameTypeSpecificDateTime = false;
+                if (TimeDelay == null)
+                    rdbTimeFrameTypeDuration = false;
+                else
+                    rdbTimeFrameTypeDuration = true;
+            }
+            else
+            {
+                this.TimeDelay = null; //blank out the time delay.
+                rdbTimeFrameTypeSpecificDateTime = true;
+            }
 
             await Task.Run(() => LoadFormDataTimerTypeEnums(emoActivity) ); //loads the enums and sets the saved value.
             
-
         }
 
 
@@ -355,24 +382,30 @@ namespace CiresonTimerActivity.WPF
 
         private DateTime? GetDateTimeFromEmoProperty(EnterpriseManagementObject emoObject, string strPropertyName)
         {
-            if (emoObject[null, strPropertyName] == null || emoObject[null, strPropertyName].Value == null || emoObject[null, strPropertyName].Value.ToString() == null)
-            {
+            if (emoObject[null, strPropertyName] == null || emoObject[null, strPropertyName].Value == null)
                 return null;
-            }
 
-            DateTime parsedDateTime;
-            if ((strPropertyName.StartsWith("Date") || strPropertyName.EndsWith("Date")) && DateTime.TryParse(strPropertyName, out parsedDateTime))
+            DateTime? parsedDateTime = emoObject[null, strPropertyName].Value as DateTime?;
+            if (parsedDateTime != null)
             {
-                parsedDateTime = parsedDateTime.ToLocalTime();
+                parsedDateTime = ((DateTime)parsedDateTime).ToLocalTime();
                 return parsedDateTime;
             }
 
+            //The direct assignment failed? Try a parse.
+            DateTime parsedDateTimeTemp;
+            if (DateTime.TryParse(strPropertyName, out parsedDateTimeTemp))
+            {
+                parsedDateTime = (DateTime)parsedDateTimeTemp.ToLocalTime();
+                return parsedDateTime;
+            }
+            
             return null;
         }
 
         public ManagementPackEnumeration GetEnumerationFromEmoProperty(EnterpriseManagementObject emoObject, string strPropertyName)
         {
-            if (emoObject[null, strPropertyName] == null || emoObject[null, strPropertyName].Value == null || emoObject[null, strPropertyName].Value.ToString() == null)
+            if (emoObject[null, strPropertyName] == null || emoObject[null, strPropertyName].Value == null)
             {
                 return null;
             }
@@ -430,6 +463,11 @@ namespace CiresonTimerActivity.WPF
         internal bool HasValidDateInfoEntered(out string stringError)
         {
 
+            if (_isTemplateMode)
+            {
+                stringError = null;
+                return true;
+            }
             //bool blnCalendarDateIsValid = true, blnTimerDateIsValid = true;
 
             if (this.Status == null || this.Status.Id == Constants.guidEnum_ActivityStatusEnum_Ready)
@@ -451,7 +489,7 @@ namespace CiresonTimerActivity.WPF
                 }
                 else if (rdbTimeFrameTypeDuration == true)
                 {
-                    if (this.TimeDelay == null || Constants.regex_NumericOnly.IsMatch(this.TimeDelay) == false)
+                    if (String.IsNullOrEmpty(this.TimeDelay) == true || Constants.regex_NumericOnly.IsMatch(this.TimeDelay) == false)
                     {
                         stringError = "You must enter a number for the time duration.";
                         return false;
@@ -466,6 +504,11 @@ namespace CiresonTimerActivity.WPF
                         return false;   
                     }
                     this.ScheduledEndDate = null;
+                }
+                else
+                {
+                    stringError = "A date or durattion must be selected";
+                    return false;
                 }
             }
             stringError = null;

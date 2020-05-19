@@ -195,6 +195,7 @@
     <Resource Include="Icons\Main.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\CiresonMeatball_trans_64x64.png" />
     <Content Include="ReferenceDLL\Microsoft.EnterpriseManagement.Common.dll" />
     <Content Include="ReferenceDLL\Microsoft.EnterpriseManagement.Core.dll" />
     <Content Include="ReferenceDLL\Microsoft.EnterpriseManagement.OperationsManager.Common.dll" />

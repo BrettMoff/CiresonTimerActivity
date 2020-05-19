@@ -2,6 +2,7 @@
 using Microsoft.EnterpriseManagement.GenericForm;
 using Microsoft.EnterpriseManagement.ServiceManager.Application.Common;
 using Microsoft.EnterpriseManagement.UI.DataModel;
+using Microsoft.EnterpriseManagement.UI.WpfControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,6 @@ namespace CiresonTimerActivity.WPF
 
             AddFormControls();
 
-            
-
         }
 
         private void AddEventHanders()
@@ -52,8 +51,32 @@ namespace CiresonTimerActivity.WPF
 
             //For loaded and data context changed events
             this.DataContextChanged += UserControl_DataContextChanged;
+
+            //Only allow numbers to be entered into the Duration Units textbox
+            this.txtDurationUnits.PreviewTextInput += NumbersOnly_PreviewTextInput;
+            this.txtDurationUnits.TextChanged += TriggerTimeValidation_TextChanged;
+            this.txtDurationUnits.GotFocus += TriggerTimeValidation_GotFocus;
+            this.dateScheduledEndDate.GotFocus += TriggerTimeValidation_GotFocus;
+            this.rdbTimeFrameTypeDuration.Checked += TriggerTimeValidation_GotFocus;
+            this.rdbTimeFrameTypeSpecificDateTime.Checked += TriggerTimeValidation_GotFocus;
+
         }
 
+        private void TriggerTimeValidation_GotFocus(object sender, RoutedEventArgs e)
+        {
+            bindingGroupTimeFrame.CommitEdit();
+        }
+
+        private void TriggerTimeValidation_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            bindingGroupTimeFrame.CommitEdit();
+        }
+
+        private void NumbersOnly_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Constants.regex_NumericOnly.IsMatch(e.Text);
+        }
+        
 
         private void TimeControls_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -79,6 +102,8 @@ namespace CiresonTimerActivity.WPF
         {
             this.relatedItemsPane = new RelatedItemsPane(new WorkItemRelatedItemsConfiguration("RelatedWorkItem", "RelatedWorkItemSource", "RelatedConfigItem", "RelatedKnowledge", "FileAttachment"));
             this.tabRelatedItems.Content = this.relatedItemsPane;
+
+            this.tabHistory.Content = new HistoryTab(); //Put this here instead of the WPF form because the WPF form wigs out half the time when debugging.
         }
 
 
@@ -145,7 +170,7 @@ namespace CiresonTimerActivity.WPF
 
 
                 //We also have to load our viewmodel with other properties.
-                activityViewModel = new CiresonTimerActivityViewModel(idataItem);
+                activityViewModel = new CiresonTimerActivityViewModel(idataItem, IsTemplateMode());
 
                 paneltestconfirmation.Visibility = Visibility.Hidden;
             }
@@ -153,7 +178,7 @@ namespace CiresonTimerActivity.WPF
             {
                 var emoActivity = this.DataContext as EnterpriseManagementObject; //Set this globally here. 
 
-                activityViewModel = new CiresonTimerActivityViewModel(emoActivity); //Also set this globally here.
+                activityViewModel = new CiresonTimerActivityViewModel(emoActivity, IsTemplateMode()); //Also set this globally here.
 
                 paneltestconfirmation.Visibility = Visibility.Visible;
             }
@@ -178,25 +203,17 @@ namespace CiresonTimerActivity.WPF
 
             thisWindowDispatcher.BeginInvoke(new Action(() =>
             {
-                //naViewModel = new Cireson.Notification.Activity.WPF.ActivityViewModel(emoActivity);
-                //naViewModelHelper = new Cireson.Notification.Activity.WPF.ActivityViewModelHelper(emoActivity);
 
                 this.maingrid.DataContext = activityViewModel; //So that we can access our ActivityViewModelHelper natively from the UI for an actual MVVM experience.
                 this.tabHistory.DataContext = this.DataContext; //So that the history tab simply works
                 this.tabRelatedItems.DataContext = this.DataContext; //So that the related item tab simply works
                 this.textParentWorkItem.DataContext = this.DataContext; //So that we can show the link to the real parent work item
 
-                //We also need to know if this is in template mode or not, which affects adding related recipients.
-                if (this.DataContext is IDataItem)
-                {
-                    FrameworkElement parentForm = this;
-                    _isTemplateMode = FormUtilities.Instance.IsFormInTemplateMode(parentForm);
-                }
+                //We also need to know if this is in template mode or not.
+                _isTemplateMode = IsTemplateMode();
 
-                /*
-                NotificationActivityUserControl thisControl = (NotificationActivityUserControl)this;
-                naViewModelHelper.UpdateFormOnDataContextChange(thisControl, this.DataContext);
-                */
+                //Trigger our form validation for our binding group.
+                bindingGroupTimeFrame.CommitEdit();
 
                 this.IsEnabled = true;
                 Console.WriteLine("Completed setting DataContexts");
@@ -205,5 +222,16 @@ namespace CiresonTimerActivity.WPF
 
 
         }
+
+        private bool IsTemplateMode()
+        {
+            if (this.DataContext is IDataItem)
+            {
+                FrameworkElement parentForm = this;
+                return FormUtilities.Instance.IsFormInTemplateMode(parentForm);
+            }
+            return false;
+        }
+
     }
 }

@@ -22,11 +22,11 @@ if (Test-Path -Path ".\CiresonTimerActivity.WPF.dll") {
 }
 
 if (Test-Path -Path ".\CiresonTimerActivity.WPF.dll") {
-    Write-Host "Deleting FontAwesome.WPF DLL..."
-    DEL ".\FontAwesome.WPF.dll"
+    Write-Host "Deleting Xceed.Wpf.Toolkit DLL..."
+    DEL ".\Xceed.Wpf.Toolkit.dll"
 }
 
-Write-Host "Copying DLL..."
+Write-Host "Copying DLLs..."
 xcopy /y "..\..\CiresonTimerActivity.WPF\bin\Debug\CiresonTimerActivity.WPF.dll" .
 xcopy /y "..\..\CiresonTimerActivity.WPF\bin\Debug\Xceed.Wpf.Toolkit.dll" .
 

@@ -90,7 +90,13 @@ namespace CiresonTimerActivity.WPF
             //cemo[null, "DisplayName"].Value = iDataItem["DisplayName"]; //the displayname on the idataitem is null
             foreach (var thisProp in mpcClass.GetProperties())
             {
-                emo[null, thisProp.Name].Value = iDataItem[thisProp.Name];
+                if (thisProp.Type == ManagementPackEntityPropertyTypes.@enum)
+                {
+                    if (iDataItem[thisProp.Name] != null && (iDataItem[thisProp.Name] as IDataItem)["DisplayName"] != null && (iDataItem[thisProp.Name] as IDataItem)["Id"] != null)
+                        emo[null, thisProp.Name].Value = (iDataItem[thisProp.Name] as IDataItem)["Id"]; //yes, the enumeration is another IDataItem.
+                }
+                else
+                    emo[null, thisProp.Name].Value = iDataItem[thisProp.Name];
             }
 
             //Also get all properties from base classes too. "Id" might be nice eh?
@@ -104,7 +110,13 @@ namespace CiresonTimerActivity.WPF
 
                     try
                     {
-                        emo[thisBaseType, thisProp.Name].Value = iDataItem[thisProp.Name];
+                        if (thisProp.Type == ManagementPackEntityPropertyTypes.@enum)
+                        {
+                            if (iDataItem[thisProp.Name] != null && (iDataItem[thisProp.Name] as IDataItem)["DisplayName"] != null && (iDataItem[thisProp.Name] as IDataItem)["Id"] != null)
+                                emo[thisBaseType, thisProp.Name].Value = (iDataItem[thisProp.Name] as IDataItem)["Id"];
+                        }
+                        else
+                            emo[thisBaseType, thisProp.Name].Value = iDataItem[thisProp.Name];
                     }
                     catch (Exception ex)
                     {
