@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace CiresonTimerActivity.WPF
+namespace Cireson.Timer.Activity.WPF
 {
     public class TextNotNullOrEmptyRule : ValidationRule
     {

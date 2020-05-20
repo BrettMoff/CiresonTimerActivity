@@ -37,13 +37,12 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="WorkflowMP\Custom.Cireson.TimerActivity.Workflow.mp" />
     <None Include="WorkflowMP\TimerActivityWorkflow.ps1" />
     <None Include="WorkflowMP\Timer_Activity_Workflow.xoml" />
     <None Include="WorkflowMP\Timer_Activity_Workflow.xomlx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WorkflowMP\Custom.Cireson.TimerActivity.Workflow.xml" />
+    <Content Include="WorkflowMP\Cireson.TimerActivity.Workflow.xml" />
     <Content Include="WorkflowMP\Timer_Activity_Workflow.dll" />
   </ItemGroup>
   <ItemGroup>

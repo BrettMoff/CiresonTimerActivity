@@ -1,0 +1,9 @@
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\Cireson.TimerActivity.WPF.csprojAssemblyReference.cache
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\Views\CiresonTimerActivityAdminControl.baml
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\Views\CiresonTimerActivityUserControl.g.cs
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\Views\CiresonTimerActivityAdminControl.g.cs
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\GeneratedInternalTypeHelper.g.cs
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF_MarkupCompile.cache
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF_MarkupCompile.lref
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF.dll
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\CiresonTimerActivity.WPF.pdb

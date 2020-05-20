@@ -19,7 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
 
-namespace CiresonTimerActivity.WPF
+namespace Cireson.Timer.Activity.WPF
 {
     /// <summary>
     /// Interaction logic for CiresonTimerActivityUserControl.xaml

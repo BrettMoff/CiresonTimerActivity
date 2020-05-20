@@ -11,7 +11,7 @@ using Microsoft.EnterpriseManagement.Common;
 using Microsoft.EnterpriseManagement.UI.SdkDataAccess.DataAdapters;
 using Microsoft.EnterpriseManagement.Configuration;
 
-namespace CiresonTimerActivity.WPF
+namespace Cireson.Timer.Activity.WPF
 {
     public class CiresonTimerActivityViewModel : INotifyPropertyChanged
     {
@@ -26,12 +26,10 @@ namespace CiresonTimerActivity.WPF
             _dataItem = dataItem;
             this._isTemplateMode = isTemplateMode;
             LoadFormData(dataItem);
-            
         }
 
         public CiresonTimerActivityViewModel(EnterpriseManagementObject emoActivity, bool isTemplateMode)
         {
-
             _emoActivity = emoActivity;
             this._isTemplateMode = isTemplateMode; 
             LoadFormDataAsync(emoActivity);

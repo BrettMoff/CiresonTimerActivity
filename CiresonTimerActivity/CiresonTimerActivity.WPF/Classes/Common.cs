@@ -18,7 +18,7 @@ using System.Reflection;
 using System.Collections.Concurrent;
 using Microsoft.EnterpriseManagement.Configuration.IO;
 
-namespace CiresonTimerActivity.WPF
+namespace Cireson.Timer.Activity.WPF
 {
     public static class Common
     {

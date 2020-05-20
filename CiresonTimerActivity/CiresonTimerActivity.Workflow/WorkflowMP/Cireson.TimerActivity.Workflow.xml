@@ -1,10 +1,10 @@
 ﻿<ManagementPack ContentReadable="true" SchemaVersion="2.0" OriginalSchemaVersion="1.1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <Manifest>
     <Identity>
-      <ID>Custom.Cireson.TimerActivity.Workflow</ID>
+      <ID>Cireson.Timer.Activity.Workflow</ID>
       <Version>1.1.0.3</Version>
     </Identity>
-    <Name>Custom.Cireson.TimerActivity.Workflow</Name>
+    <Name>Cireson.Timer.Activity.Workflow</Name>
     <References>
       <Reference Alias="System">
         <ID>System.Library</ID>
@@ -91,8 +91,8 @@ Catch{
     </ModuleTypes>
   </TypeDefinitions>
   <Categories>
-    <Category ID="Custom.Cireson.TimerActivity.Workflow.Category" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.ManagementPack">
-      <ManagementPackName>Custom.Cireson.TimerActivity.Workflow</ManagementPackName>
+    <Category ID="Cireson.Timer.Activity.Workflow.Category" Value="Console!Microsoft.EnterpriseManagement.ServiceManager.ManagementPack">
+      <ManagementPackName>Cireson.Timer.Activity.Workflow</ManagementPackName>
       <ManagementPackVersion>1.0.0.0</ManagementPackVersion>
     </Category>
     <Category ID="Timer_Activity_WorkflowCategory" Target="Timer_Activity_Workflow" Value="EnterpriseManagement!Microsoft.EnterpriseManagement.ServiceManager.Rules.WorkflowSubscriptions" />
@@ -137,15 +137,15 @@ Catch{
   <LanguagePacks>
     <LanguagePack ID="ENA" IsDefault="true">
       <DisplayStrings>
-        <DisplayString ElementID="Custom.Cireson.TimerActivity.Workflow">
-          <Name>Custom.Cireson.TimerActivity.Workflow</Name>
+        <DisplayString ElementID="Cireson.Timer.Activity.Workflow">
+          <Name>Cireson.Timer.Activity.Workflow</Name>
         </DisplayString>
       </DisplayStrings>
     </LanguagePack>
     <LanguagePack ID="ENU" IsDefault="false">
       <DisplayStrings>
-        <DisplayString ElementID="Custom.Cireson.TimerActivity.Workflow">
-          <Name>Custom.Cireson.TimerActivity.Workflow</Name>
+        <DisplayString ElementID="Cireson.Timer.Activity.Workflow">
+          <Name>Cireson.Timer.Activity.Workflow</Name>
         </DisplayString>
         <DisplayString ElementID="Timer_Activity_Workflow">
           <Name>Timer_Activity_Workflow</Name>

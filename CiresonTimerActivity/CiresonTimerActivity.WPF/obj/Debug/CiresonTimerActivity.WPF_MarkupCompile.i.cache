@@ -4,17 +4,17 @@
 library
 C#
 .cs
-C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\
+Y:\Code\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.WPF\obj\Debug\
 CiresonTimerActivity.WPF
 none
 false
 DEBUG;TRACE
 
-22075719942
+21686914589
 18-1118292565
-11-691735621
-38-85235732
-Views\CiresonTimerActivityUserControl.xaml;Views\CiresonTimerActivityAdminControl.xaml;
+131468075753
+38701304598
+Views\CiresonTimerActivityUserControl.xaml;Views\TimerActivitySettingsWindow.xaml;
 
-True
+False
 

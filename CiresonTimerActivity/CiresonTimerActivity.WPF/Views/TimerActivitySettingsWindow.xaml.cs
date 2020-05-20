@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CiresonTimerActivity.WPF.Views
+namespace Cireson.Timer.Activity.WPF
 {
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class TimerActivitySettingsWindow : Window
     {
-        public UserControl1()
+        public TimerActivitySettingsWindow()
         {
             InitializeComponent();
         }
