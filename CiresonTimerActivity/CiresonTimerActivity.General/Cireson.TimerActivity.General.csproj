@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ManagementPack\CiresonMeatball_trans_64x64.png" />
-    <Content Include="ManagementPack\CiresonTimerActivity.Library.xml" />
+    <Content Include="ManagementPack\Cireson.TimerActivity.Library.xml" />
     <Content Include="ManagementPack\FastSeal.exe" />
     <Content Include="ManagementPack\signtool.exe" />
   </ItemGroup>

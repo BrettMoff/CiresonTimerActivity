@@ -1,0 +1,7 @@
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\bin\Debug\CiresonTimerActivity.General.dll.config
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\bin\Debug\CiresonTimerActivity.General.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\bin\Debug\CiresonTimerActivity.General.pdb
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\Cireson.TimerActivity.General.csprojAssemblyReference.cache
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\Cireson.TimerActivity.General.csproj.CoreCompileInputs.cache
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.dll
+C:\Users\BrettMoffett\Documents\CiresonTimerActivity\CiresonTimerActivity\CiresonTimerActivity.General\obj\Debug\CiresonTimerActivity.General.pdb

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiresonTimerActivity.Workflow", "CiresonTimerActivity.Workflow\CiresonTimerActivity.Workflow.csproj", "{34E6B53A-7E67-472A-A4B1-E9A9F555DD47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cireson.TimerActivity.Workflow", "CiresonTimerActivity.Workflow\Cireson.TimerActivity.Workflow.csproj", "{34E6B53A-7E67-472A-A4B1-E9A9F555DD47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiresonTimerActivity.General", "CiresonTimerActivity.General\CiresonTimerActivity.General.csproj", "{227F2E48-BDDE-4A9F-80FF-907A86A80005}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cireson.TimerActivity.General", "CiresonTimerActivity.General\Cireson.TimerActivity.General.csproj", "{227F2E48-BDDE-4A9F-80FF-907A86A80005}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiresonTimerActivity.WPF", "CiresonTimerActivity.WPF\CiresonTimerActivity.WPF.csproj", "{B6EE4F09-0E6A-4BDC-A21C-1E14E92BBDAA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cireson.TimerActivity.WPF", "CiresonTimerActivity.WPF\Cireson.TimerActivity.WPF.csproj", "{B6EE4F09-0E6A-4BDC-A21C-1E14E92BBDAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiresonTimerActivity.TesterApp", "CiresonTimerActivity.TesterApp\CiresonTimerActivity.TesterApp.csproj", "{7BD1CC8B-16EC-42ED-A342-7C0E7E076927}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cireson.TimerActivity.TesterApp", "CiresonTimerActivity.TesterApp\Cireson.TimerActivity.TesterApp.csproj", "{7BD1CC8B-16EC-42ED-A342-7C0E7E076927}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

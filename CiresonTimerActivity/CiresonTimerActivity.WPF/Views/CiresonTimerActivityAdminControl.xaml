@@ -1,0 +1,33 @@
+﻿<wpfwiz:WizardRegularPageBase x:Class="CiresonTimerActivity.AdminSettingsForm" 
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:wpfwiz="clr-namespace:Microsoft.EnterpriseManagement.UI.WpfWizardFramework;assembly=Microsoft.EnterpriseManagement.UI.WpfWizardFramework"
+            xmlns:smcontrols="clr-namespace:Microsoft.EnterpriseManagement.UI.WpfControls;assembly=Microsoft.EnterpriseManagement.UI.SmControls"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:Custom="http://schemas.microsoft.com/SystemCenter/Common/UI/Wpf" mc:Ignorable="d" Width="630" Height="409">
+
+    <Grid x:Name="maingrid" DataContext="{Binding Path=naViewModelHelper}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Name="gridRowBanner" Height="66" />
+            <RowDefinition Name="gridRowFormContent" />
+        </Grid.RowDefinitions>
+        <Grid Name="TitleGrid" Grid.Row="0" Margin="10,10,10,10">
+            <Image Name="imageActivityIcon" Source="/CiresonTimerActivity.WPF;component/Icons/CiresonMeatball_trans_64x64.png" Stretch="None" HorizontalAlignment="Left"  Style="{DynamicResource BannerIconStyle}"  />
+            <Label Content="Cireson Timer Activity Settings" Margin="20,10,10,0" VerticalAlignment="Center" Height="48" FontWeight="Bold" FontSize="18"/>
+        </Grid>
+        <Grid Name="ConfigurationGrid" Grid.Row="1" Margin="10,10,10,10">
+            <ScrollViewer Name="scrollViewer" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="388" Margin="0,0,0,0" Height="294" VerticalAlignment="Top">
+                <StackPanel Name="stackPanel" Orientation="Vertical" Height="281.5">
+                    <CheckBox Name="chkEnableLogging" Content="Enable Logging" Margin="10" IsTabStop="True" TabIndex="1" />
+                    <Label Height="25" Padding="0" Margin="10" x:Name="datafilepathLabel_Copy1" Content="Log file path:" IsTabStop="False"/>
+                    <TextBox Height="25" Margin="10,-15,10,0" Name="LogPathTextBlock" IsTabStop="True" TabIndex="2">
+                        <TextBox.Text>
+                            <Binding Path="LogPath" Mode="TwoWay" FallbackValue=""/>
+                        </TextBox.Text>
+                    </TextBox>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</wpfwiz:WizardRegularPageBase> 

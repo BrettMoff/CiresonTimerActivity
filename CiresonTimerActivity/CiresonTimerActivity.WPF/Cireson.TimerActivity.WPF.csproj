@@ -158,7 +158,14 @@
     <Compile Include="Views\CiresonTimerActivityUserControl.xaml.cs">
       <DependentUpon>CiresonTimerActivityUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CiresonTimerActivityAdminControl.xaml.cs">
+      <DependentUpon>CiresonTimerActivityAdminControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\CiresonTimerActivityUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CiresonTimerActivityAdminControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
