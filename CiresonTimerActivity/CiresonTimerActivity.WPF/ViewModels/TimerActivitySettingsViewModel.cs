@@ -11,11 +11,33 @@ namespace Cireson.Timer.Activity.WPF
     public class TimerActivitySettingsViewModel : INotifyPropertyChanged
     {
 
-
+        public TimerActivitySettingsViewModel()
+        {
+            LoadFormData();
+        }
 
         #region Variables
 
         //TODO: Create our two variables
+
+        private bool _LogEnable;
+        public bool LogEnable
+        {
+            get
+            {
+                return this._LogEnable;
+            }
+            set
+            {
+                if (this._LogEnable != value)
+                {
+                    this._LogEnable = value;
+                    string strPropertyName = "LogEnable";
+                    RaisePropertyChanged(strPropertyName);
+                }
+            }
+        }
+
         //TODO: On the WPF form, create bindings in our two fields that match the same variable names.
         //TODO: On the WPF form, add an OK and cancel button. Hook them up to the view model somehow. 
 
@@ -62,6 +84,24 @@ namespace Cireson.Timer.Activity.WPF
         /// </summary>
         public void SaveFormData()
         {
+            //Get and set the values for our settings object
+
+            throw new NotImplementedException("not yet...");
+            
+            var emoSettingsObject = Common.GetSettingsObject(Constants.TimerActivityClassName); //Cireson.Timer.Activity.Settings
+            emoSettingsObject.Commit();
+        }
+
+        public void LoadFormData()
+        {
+            var emoSettingsObject = Common.GetSettingsObject(Constants.TimerActivityClassName); //Cireson.Timer.Activity.Settings
+            bool isLogedEnabledFromSettings = false;
+            bool.TryParse((string)emoSettingsObject[null, "LogEnable"].Value, out isLogedEnabledFromSettings);
+            
+            //Set our values on hte form.
+            this.LogEnable = isLogedEnabledFromSettings;
+
+
 
 
         }

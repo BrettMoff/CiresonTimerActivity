@@ -9,6 +9,7 @@ namespace Cireson.Timer.Activity.WPF
     class Constants
     {
         //CiresonTimerActivity.FullProjection 09e828e9-0fc8-b8b6-7184-6519aed32270
+        public static readonly string TimerActivityClassName = "Cireson.Timer.Activity.Settings";
 
         public static readonly Guid guid_Projection_CiresonTimerActivity_FullProjection = new Guid("d8d519be-df31-4fd7-8d5b-155cc5d5fc20"); //Cireson.Timer.Activity.FullProjection  
 

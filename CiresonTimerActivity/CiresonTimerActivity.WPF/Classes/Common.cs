@@ -59,6 +59,17 @@ namespace Cireson.Timer.Activity.WPF
         }
 
 
+        public static EnterpriseManagementObject GetSettingsObject(string strClassName)
+        {
+            var emg = Common.GetManagementGroup();
+            var mpcSettingsClass = Common.GetManagementPackClassByName(strClassName, emg);
+
+            var settingsObjects = emg.EntityObjects.GetObjectReader<EnterpriseManagementObject>(mpcSettingsClass, ObjectQueryOptions.Default);
+            var onlySettingObject = settingsObjects.First();
+
+            return onlySettingObject;
+        }
+
         public static EnterpriseManagementObject ConvertIdataitemToEmo(IDataItem iDataItem)
         {
             if (iDataItem == null)

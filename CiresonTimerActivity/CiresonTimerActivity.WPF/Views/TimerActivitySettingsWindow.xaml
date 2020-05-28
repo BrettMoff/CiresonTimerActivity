@@ -6,28 +6,32 @@
             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:Custom="http://schemas.microsoft.com/SystemCenter/Common/UI/Wpf" mc:Ignorable="d" Width="630" Height="409">
 
-    <Grid x:Name="maingrid" DataContext="{Binding Path=naViewModelHelper}" Background="LightGray">
+    <Grid x:Name="maingrid" Background="LightGray">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Name="gridRowBanner" Height="66" />
-            <RowDefinition Name="gridRowFormContent" />
-        </Grid.RowDefinitions>
-        <Grid Name="TitleGrid" Grid.Row="0" Margin="10,10,10,10">
-            <Image Name="imageActivityIcon" Source="/CiresonTimerActivity.WPF;component/Icons/CiresonMeatball_trans_64x64.png" Stretch="None" HorizontalAlignment="Left"  />
-            <Label Content="Cireson Timer Activity Settings" Margin="20,10,10,0" VerticalAlignment="Center" Height="48" FontWeight="Bold" FontSize="18"/>
-        </Grid>
-        <Grid Name="ConfigurationGrid" Grid.Row="1" Margin="10,10,10,10">
-            <ScrollViewer Name="scrollViewer" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="388" Margin="0,0,0,0" Height="294" VerticalAlignment="Top">
-                <StackPanel Name="stackPanel" Orientation="Vertical" Height="281.5">
-                    <CheckBox Name="chkEnableLogging" Content="Enable Logging" Margin="10" IsTabStop="True" TabIndex="1" />
-                    <Label Height="25" Padding="0" Margin="10" x:Name="datafilepathLabel_Copy1" Content="Log file path:" IsTabStop="False"/>
-                    <TextBox Height="25" Margin="10,-15,10,0" Name="LogPathTextBlock" IsTabStop="True" TabIndex="2">
-                        <TextBox.Text>
-                            <Binding Path="LogPath" Mode="TwoWay" FallbackValue=""/>
-                        </TextBox.Text>
-                    </TextBox>
-                </StackPanel>
-            </ScrollViewer>
-        </Grid>
+        <StackPanel>
+            <Grid Name="TitleGrid" Grid.Row="0" Margin="10,10,10,10">
+                <Image Name="imageActivityIcon" Source="/CiresonTimerActivity.WPF;component/Icons/CiresonMeatball_trans_64x64.png" Stretch="None" HorizontalAlignment="Left"  />
+                <Label Content="Cireson Timer Activity Settings" Margin="20,10,10,0" VerticalAlignment="Center" Height="48" FontWeight="Bold" FontSize="18"/>
+            </Grid>
+            <Grid Name="ConfigurationGrid" Grid.Row="1" Margin="10,10,10,10">
+                <ScrollViewer Name="scrollViewer" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="388" Margin="0,0,0,0" Height="294" VerticalAlignment="Top">
+                    <StackPanel Name="stackPanel" Orientation="Vertical" Height="281.5">
+                        <CheckBox Name="chkEnableLogging" Content="Enable Logging" Margin="10" IsTabStop="True" TabIndex="1" IsChecked="{Binding Path=LogEnable}" />
+                        <Label Height="25" Padding="0" Margin="10" x:Name="datafilepathLabel_Copy1" Content="Log file path:" IsTabStop="False"/>
+                        <TextBox Height="25" Margin="10,-15,10,0" Name="LogPathTextBlock" IsTabStop="True" TabIndex="2">
+                            <TextBox.Text>
+                                <Binding Path="LogPath" Mode="TwoWay" FallbackValue=""/>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </StackPanel>
+        
+        <DockPanel Margin="0 0 5 0" VerticalAlignment="Bottom" Height="30px" >
+            
+            <Button x:Name="btnCancel" Width="60px" HorizontalAlignment="Right" DockPanel.Dock="Right" Command="{Binding CancelCommand}">Cancel</Button>
+            <Button x:Name="btnOK"  Width="60px" HorizontalAlignment="Right" DockPanel.Dock="Right" Command="{Binding OKCommand}" >OK</Button>
+        </DockPanel>
     </Grid>
 </Window> 

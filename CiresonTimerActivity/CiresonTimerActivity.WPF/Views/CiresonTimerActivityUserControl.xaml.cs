@@ -27,7 +27,7 @@ namespace Cireson.Timer.Activity.WPF
     public partial class CiresonTimerActivityUserControl : UserControl
     {
 
-        public  CiresonTimerActivityViewModel activityViewModel; //null to start
+        public CiresonTimerActivityViewModel activityViewModel; //null to start
 
         private RelatedItemsPane relatedItemsPane;
         public bool _isTemplateMode = false; //This form was actually opened as a template, not a real work item

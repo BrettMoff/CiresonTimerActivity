@@ -20,9 +20,25 @@ namespace Cireson.Timer.Activity.WPF
     /// </summary>
     public partial class TimerActivitySettingsWindow : Window
     {
+        
+        
         public TimerActivitySettingsWindow()
         {
             InitializeComponent();
+
+            AddEventHandlers();
+
+            
+        }
+
+        private void AddEventHandlers()
+        {
+            btnCancel.Click += BtnCancel_Click;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
