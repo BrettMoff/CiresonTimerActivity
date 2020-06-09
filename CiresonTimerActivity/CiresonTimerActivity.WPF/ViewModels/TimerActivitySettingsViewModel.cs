@@ -38,7 +38,25 @@ namespace Cireson.Timer.Activity.WPF
             }
         }
 
-        //TODO: On the WPF form, create bindings in our two fields that match the same variable names.
+        private string _LogPath;
+
+        public string LogPath
+        {
+            get
+            {
+                return this._LogPath;
+            }
+            set
+            {
+                if (this._LogPath != value)
+                {
+                    this._LogPath = value;
+                    string strPropertyName = "LogPath";
+                    RaisePropertyChanged(strPropertyName);
+                }
+            }
+        }
+        //TODO: On the WPF form, create bindings in our two fields that match the same variable names. - DONE (I think)
         //TODO: On the WPF form, add an OK and cancel button. Hook them up to the view model somehow. 
 
         #endregion
@@ -56,8 +74,16 @@ namespace Cireson.Timer.Activity.WPF
         }
 
         public bool CanPressOk()
+        //Do some logic here to determine if I can press OK?
         {
-            return false; //Do some logic here to determine if I can press OK?
+            if ((this._LogEnable != LogEnable) || (this._LogPath != LogPath)) //If the form value does not match the saved value, then the form has changed and can be saved.
+            { 
+                return true;
+            }
+            else
+            { 
+                return false;
+            } 
         }
 
         /// <summary>
@@ -75,9 +101,7 @@ namespace Cireson.Timer.Activity.WPF
                 SaveFormData();
             }
             catch (Exception) { throw; }
-
         }
-
 
         /// <summary>
         /// This only gets called in test mode, as the SCSM window would normally just save the idataitem.
@@ -95,15 +119,15 @@ namespace Cireson.Timer.Activity.WPF
         public void LoadFormData()
         {
             var emoSettingsObject = Common.GetSettingsObject(Constants.TimerActivityClassName); //Cireson.Timer.Activity.Settings
-            bool isLogedEnabledFromSettings = false;
-            bool.TryParse((string)emoSettingsObject[null, "LogEnable"].Value, out isLogedEnabledFromSettings);
+            bool isLogEnabledFromSettings = false;
+            bool.TryParse((string)emoSettingsObject[null, "LogEnable"].Value, out isLogEnabledFromSettings);
             
-            //Set our values on hte form.
-            this.LogEnable = isLogedEnabledFromSettings;
+            string isLogPathFromSettings = "";
+            string.((string)emoSettingsObject[null, "LogPath"].Value, out isLogPathFromSettings);  //????? This does not need to be converted to a Bool so not sure how to pass a string from the data set
 
-
-
-
+            //Set our values on the form.
+            this.LogEnable = isLogEnabledFromSettings;
+            this.LogPath = isLogPathFromSettings;
         }
 
         #endregion

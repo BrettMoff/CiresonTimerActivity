@@ -40,5 +40,10 @@ namespace Cireson.Timer.Activity.WPF
         {
             this.Close();
         }
+
+        private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            if CheckBox TimerActivitySettingsWindow.chkEnableLogging = "True" { }
+        }
     }
 }

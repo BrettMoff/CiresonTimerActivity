@@ -13,12 +13,20 @@
                 <Image Name="imageActivityIcon" Source="/CiresonTimerActivity.WPF;component/Icons/CiresonMeatball_trans_64x64.png" Stretch="None" HorizontalAlignment="Left"  />
                 <Label Content="Cireson Timer Activity Settings" Margin="20,10,10,0" VerticalAlignment="Center" Height="48" FontWeight="Bold" FontSize="18"/>
             </Grid>
-            <Grid Name="ConfigurationGrid" Grid.Row="1" Margin="10,10,10,10">
-                <ScrollViewer Name="scrollViewer" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Width="388" Margin="0,0,0,0" Height="294" VerticalAlignment="Top">
-                    <StackPanel Name="stackPanel" Orientation="Vertical" Height="281.5">
-                        <CheckBox Name="chkEnableLogging" Content="Enable Logging" Margin="10" IsTabStop="True" TabIndex="1" IsChecked="{Binding Path=LogEnable}" />
+            <Grid Name="ConfigurationGrid" Grid.Row="1" Margin="10,10,10,-30">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="23*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer Name="scrollViewer" CanContentScroll="True" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                    <StackPanel Name="stackPanel" Orientation="Vertical" Height="250">
+                        <CheckBox Name="chkEnableLogging" Content="Enable Logging" Margin="10" IsTabStop="True" TabIndex="10" IsChecked="{Binding Path=LogEnable}" />
                         <Label Height="25" Padding="0" Margin="10" x:Name="datafilepathLabel_Copy1" Content="Log file path:" IsTabStop="False"/>
-                        <TextBox Height="25" Margin="10,-15,10,0" Name="LogPathTextBlock" IsTabStop="True" TabIndex="2">
+                        <TextBox Height="25" Margin="10,-15,10,0" Name="LogPathTextBlock" IsTabStop="True" TabIndex="20">
                             <TextBox.Text>
                                 <Binding Path="LogPath" Mode="TwoWay" FallbackValue=""/>
                             </TextBox.Text>
@@ -27,11 +35,11 @@
                 </ScrollViewer>
             </Grid>
         </StackPanel>
-        
-        <DockPanel Margin="0 0 5 0" VerticalAlignment="Bottom" Height="30px" >
-            
-            <Button x:Name="btnCancel" Width="60px" HorizontalAlignment="Right" DockPanel.Dock="Right" Command="{Binding CancelCommand}">Cancel</Button>
-            <Button x:Name="btnOK"  Width="60px" HorizontalAlignment="Right" DockPanel.Dock="Right" Command="{Binding OKCommand}" >OK</Button>
+
+        <DockPanel Margin="0 0 0 0" VerticalAlignment="Bottom" Height="30px" >
+
+            <Button x:Name="btnCancel" Width="60px" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="5 0 5 5" Command="{Binding CancelCommand}">Cancel</Button>
+            <Button x:Name="btnOK"  Width="60px" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="5 0 5 5" Command="{Binding OKCommand}" Click="btnOK_Click" >OK</Button>
         </DockPanel>
     </Grid>
 </Window> 
