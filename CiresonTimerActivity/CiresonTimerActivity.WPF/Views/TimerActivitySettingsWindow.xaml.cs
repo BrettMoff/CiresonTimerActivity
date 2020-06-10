@@ -20,30 +20,15 @@ namespace Cireson.Timer.Activity.WPF
     /// </summary>
     public partial class TimerActivitySettingsWindow : Window
     {
-        
-        
+        TimerActivitySettingsViewModel settingsViewModel;
         public TimerActivitySettingsWindow()
         {
             InitializeComponent();
+            settingsViewModel = new TimerActivitySettingsViewModel();
+            this.DataContext = settingsViewModel;
 
-            AddEventHandlers();
-
-            
-        }
-
-        private void AddEventHandlers()
-        {
-            btnCancel.Click += BtnCancel_Click;
-        }
-
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-            if CheckBox TimerActivitySettingsWindow.chkEnableLogging = "True" { }
+            if (settingsViewModel.CloseAction == null)
+                settingsViewModel.CloseAction = new Action(this.Close);
         }
     }
 }

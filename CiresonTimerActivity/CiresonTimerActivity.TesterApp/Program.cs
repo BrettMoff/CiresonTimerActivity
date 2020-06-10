@@ -19,7 +19,7 @@ namespace CiresonTimerActivity.TesterApp
         {
 
 
-            Console.WriteLine("Type in the Work Item ID (e.g. 'AC1234'). Or just press enter to grab the first found Timer Activity");
+            Console.WriteLine("Type in the Work Item ID (e.g. 'AC1234'). Or just press enter to grab the first found Timer Activity. Tot test settings type 'settings'");
             string strID = Console.ReadLine();
 
 

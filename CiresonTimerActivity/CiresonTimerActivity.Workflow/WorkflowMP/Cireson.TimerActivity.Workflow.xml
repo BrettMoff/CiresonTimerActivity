@@ -57,23 +57,24 @@
               <WriteAction ID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39.PSWA" TypeID="Windows!Microsoft.Windows.PowerShellWriteAction">
                 <ScriptName>DoWork.ps1</ScriptName>
                 <ScriptBody>
-$enumActive = (Get-SCSMEnumeration ActivityStatusEnum.Active$).Id
-$enumOnHold = (Get-SCSMEnumeration ActivityStatusEnum.OnHold$).Id
-$enumCompleted = (Get-SCSMEnumeration ActivityStatusEnum.Completed$).Id
+                  $enumActive = (Get-SCSMEnumeration ActivityStatusEnum.Active$).Id
+                  $enumOnHold = (Get-SCSMEnumeration ActivityStatusEnum.OnHold$).Id
+                  $enumCompleted = (Get-SCSMEnumeration ActivityStatusEnum.Completed$).Id
 
-$ActiveTimers = get-scsmobject -class(get-scsmclass -name timer_Activity) -filter "Status -eq $enumActive -or Status -eq $enumOnHold"
+                  $ActiveTimers = get-scsmobject -class(get-scsmclass -name Cireson.Timer.Activity) -filter "Status -eq $enumActive -or Status -eq $enumOnHold"
+                  $emoSettingsObject = get-scsmobject -class(get-scsmclass -name Cireson.Timer.Activity.Settings)
 
-Try {
-    ForEach ($Activity in $ActiveTimers) {
-        If ((Get-Date) -gt $Activity.ScheduledEndTime) {
-            $ActivityHash = @{"Status" = $enumCompleted}
-            Set-SCSMObject -SMObject $Activity -PropertyHashTable $ActivityHash
-        }
-    }
-}
-Catch{
-    out-file "C:\temp\timererror.log" -InputObject $_.exception.message -append
-}</ScriptBody>
+                  Try {
+                  ForEach ($Activity in $ActiveTimers) {
+                  If ((Get-Date) -gt $Activity.ScheduledEndTime) {
+                  $ActivityHash = @{"Status" = $enumCompleted}
+                  Set-SCSMObject -SMObject $Activity -PropertyHashTable $ActivityHash
+                  }
+                  }
+                  }
+                  Catch{
+                  out-file "C:\temp\timererror.log" -InputObject $_.exception.message -append
+                  }</ScriptBody>
                 <SnapIns></SnapIns>
                 <Parameters></Parameters>
                 <TimeoutSeconds>300</TimeoutSeconds>

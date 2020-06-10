@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Cireson.Timer.Activity.WPF
@@ -19,6 +20,8 @@ namespace Cireson.Timer.Activity.WPF
         #region Variables
 
         //TODO: Create our two variables
+        private bool _LogEnableDBValue; //Variable to hold the value read from the DB when form loaded.
+        private string _LogPathDBValue; //Variable to hold the path value read from the DB when form loaded.
 
         private bool _LogEnable;
         public bool LogEnable
@@ -56,9 +59,8 @@ namespace Cireson.Timer.Activity.WPF
                 }
             }
         }
-        //TODO: On the WPF form, create bindings in our two fields that match the same variable names. - DONE (I think)
-        //TODO: On the WPF form, add an OK and cancel button. Hook them up to the view model somehow. 
-
+       
+        public Action CloseAction { get; set; }
         #endregion
 
         #region Command Methods
@@ -76,7 +78,7 @@ namespace Cireson.Timer.Activity.WPF
         public bool CanPressOk()
         //Do some logic here to determine if I can press OK?
         {
-            if ((this._LogEnable != LogEnable) || (this._LogPath != LogPath)) //If the form value does not match the saved value, then the form has changed and can be saved.
+            if ((this._LogEnable != _LogEnableDBValue) || (this._LogPath != _LogPathDBValue)) //If the form value does not match the saved value, then the form has changed and can be saved.
             { 
                 return true;
             }
@@ -86,21 +88,24 @@ namespace Cireson.Timer.Activity.WPF
             } 
         }
 
-        /// <summary>
         /// The user pressed the cancel button on the form.
-        /// </summary>
         public void CancelMethod()
         {
-            
+            CloseAction();
         }
 
+        /// The user pressed the OK button on the form.
         public void OKMethod()
         {
             try
             {
                 SaveFormData();
+                CloseAction();
             }
-            catch (Exception) { throw; }
+            catch (Exception ex) {
+                MessageBox.Show(ex.Message);
+                throw; 
+            }
         }
 
         /// <summary>
@@ -109,10 +114,9 @@ namespace Cireson.Timer.Activity.WPF
         public void SaveFormData()
         {
             //Get and set the values for our settings object
-
-            throw new NotImplementedException("not yet...");
-            
             var emoSettingsObject = Common.GetSettingsObject(Constants.TimerActivityClassName); //Cireson.Timer.Activity.Settings
+            emoSettingsObject[null, "LogEnable"].Value = this.LogEnable;
+            emoSettingsObject[null, "LogPath"].Value = this.LogPath.Trim();
             emoSettingsObject.Commit();
         }
 
@@ -121,13 +125,18 @@ namespace Cireson.Timer.Activity.WPF
             var emoSettingsObject = Common.GetSettingsObject(Constants.TimerActivityClassName); //Cireson.Timer.Activity.Settings
             bool isLogEnabledFromSettings = false;
             bool.TryParse((string)emoSettingsObject[null, "LogEnable"].Value, out isLogEnabledFromSettings);
-            
-            string isLogPathFromSettings = "";
-            string.((string)emoSettingsObject[null, "LogPath"].Value, out isLogPathFromSettings);  //????? This does not need to be converted to a Bool so not sure how to pass a string from the data set
+            _LogEnableDBValue = isLogEnabledFromSettings;
+
+            string strLogPathFromSettings = "";
+            if (emoSettingsObject[null, "LogPath"].Value != null)
+            {
+                strLogPathFromSettings = (string)emoSettingsObject[null, "LogPath"].Value;
+            }
+            _LogPathDBValue = strLogPathFromSettings;
 
             //Set our values on the form.
             this.LogEnable = isLogEnabledFromSettings;
-            this.LogPath = isLogPathFromSettings;
+            this.LogPath = strLogPathFromSettings;
         }
 
         #endregion
@@ -144,7 +153,6 @@ namespace Cireson.Timer.Activity.WPF
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-
         #endregion
 
     }

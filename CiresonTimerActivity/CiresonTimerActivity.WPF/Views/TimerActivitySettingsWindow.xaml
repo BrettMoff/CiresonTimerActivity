@@ -10,7 +10,7 @@
 
         <StackPanel>
             <Grid Name="TitleGrid" Grid.Row="0" Margin="10,10,10,10">
-                <Image Name="imageActivityIcon" Source="/CiresonTimerActivity.WPF;component/Icons/CiresonMeatball_trans_64x64.png" Stretch="None" HorizontalAlignment="Left"  />
+                <Image Name="imageActivityIcon" Source="/Cireson.Timer.Activity.WPF;component/Icons/CiresonMeatball_trans_64x64.png" Stretch="None" HorizontalAlignment="Left"  />
                 <Label Content="Cireson Timer Activity Settings" Margin="20,10,10,0" VerticalAlignment="Center" Height="48" FontWeight="Bold" FontSize="18"/>
             </Grid>
             <Grid Name="ConfigurationGrid" Grid.Row="1" Margin="10,10,10,-30">
