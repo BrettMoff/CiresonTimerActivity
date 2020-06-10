@@ -47,9 +47,6 @@ namespace CiresonTimerActivity.TesterApp
                 
                 defaultWindow = new TimerActivitySettingsWindow();
 
-                var swSettingsViewModel = new TimerActivitySettingsViewModel();
-                defaultWindow.DataContext = swSettingsViewModel;
-
                 defaultWindow.Width = 400;
                 defaultWindow.Height = 300;
 

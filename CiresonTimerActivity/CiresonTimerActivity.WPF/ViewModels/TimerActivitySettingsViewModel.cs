@@ -124,7 +124,10 @@ namespace Cireson.Timer.Activity.WPF
         {
             var emoSettingsObject = Common.GetSettingsObject(Constants.TimerActivityClassName); //Cireson.Timer.Activity.Settings
             bool isLogEnabledFromSettings = false;
-            bool.TryParse((string)emoSettingsObject[null, "LogEnable"].Value, out isLogEnabledFromSettings);
+            if (emoSettingsObject[null, "LogEnable"].Value != null)
+            {
+                bool.TryParse(emoSettingsObject[null, "LogEnable"].Value.ToString(), out isLogEnabledFromSettings);
+            }
             _LogEnableDBValue = isLogEnabledFromSettings;
 
             string strLogPathFromSettings = "";

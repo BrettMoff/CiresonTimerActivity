@@ -28,7 +28,7 @@
                         <Label Height="20" Margin="20,11,0,0" Padding="0" x:Name="datafilepathLabel_Copy1" Content="Log file path:" IsTabStop="False"/>
                         <TextBox Height="25" Margin="20,0,20,0" Name="LogPathTextBlock" IsTabStop="True" Width="Auto" TabIndex="20">
                             <TextBox.Text>
-                                <Binding Path="LogPath" Mode="TwoWay" FallbackValue=""/>
+                                <Binding Path="LogPath" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" FallbackValue=""/>
                             </TextBox.Text>
                         </TextBox>
                     </StackPanel>
