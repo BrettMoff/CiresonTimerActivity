@@ -2,13 +2,13 @@
   <Manifest>
     <Identity>
       <ID>Cireson.Timer.Activity.Workflow</ID>
-      <Version>1.1.0.3</Version>
+      <Version>1.2.0.0</Version>
     </Identity>
     <Name>Cireson.Timer.Activity.Workflow</Name>
     <References>
       <Reference Alias="System">
         <ID>System.Library</ID>
-        <Version>7.5.8501.0</Version>
+        <Version>7.5.16.0</Version>
         <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
       </Reference>
       <Reference Alias="Console">
@@ -23,7 +23,7 @@
       </Reference>
       <Reference Alias="SystemCenter">
         <ID>Microsoft.SystemCenter.Library</ID>
-        <Version>7.0.8437.0</Version>
+        <Version>7.0.16.0</Version>
         <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
       </Reference>
       <Reference Alias="SystemCenter1">
@@ -38,7 +38,7 @@
       </Reference>
       <Reference Alias="Windows">
         <ID>Microsoft.Windows.Library</ID>
-        <Version>7.5.8501.0</Version>
+        <Version>7.5.16.0</Version>
         <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
       </Reference>
     </References>
@@ -57,35 +57,36 @@
               <WriteAction ID="Timer_Activity_Workflow.WindowsPowerShellScript.fb9d7a78_fbc2_443f_92db_452501c45d39.PSWA" TypeID="Windows!Microsoft.Windows.PowerShellWriteAction">
                 <ScriptName>DoWork.ps1</ScriptName>
                 <ScriptBody>
-					$emoSettingsObject = get-scsmobject -class(get-scsmclass -name Cireson.Timer.Activity.Settings)
-					$enumActive = (Get-SCSMEnumeration ActivityStatusEnum.Active$).Id
-					$enumOnHold = (Get-SCSMEnumeration ActivityStatusEnum.OnHold$).Id
-					$enumCompleted = (Get-SCSMEnumeration ActivityStatusEnum.Completed$).Id
+                  $enumActive = (Get-SCSMEnumeration ActivityStatusEnum.Active$).Id
+                  $enumOnHold = (Get-SCSMEnumeration ActivityStatusEnum.OnHold$).Id
+                  $enumCompleted = (Get-SCSMEnumeration ActivityStatusEnum.Completed$).Id
+                  $LogPath = (get-scsmsetting -displayname "Cireson Timer Activity Settings").LogPath
+                  $LogEnable = (get-scsmsetting -displayname "Cireson Timer Activity Settings").Logenable
 
-					Try {
-					$ActiveTimers = get-scsmobject -class(get-scsmclass -name Cireson.Timer.Activity) -filter "Status -eq $enumActive -or Status -eq $enumOnHold"
-					If ($emoSettingsObject.logEnable -eq True){
-					out-file $emoSettingsObject.logPath -InputObject $ActiveTimer.count -append
-					}
-					}
-					Catch {
-					If ($emoSettingsObject.logEnable -eq True){
-					out-file $emoSettingsObject.logPath -InputObject $_.exception.message -append
-					}
-					}
+                  $ActiveTimers = get-scsmobject -class(get-scsmclass -name Cireson.Timer.Activity$) -filter "Status -eq $enumActive -or Status -eq $enumOnHold"
+                  LogThis ("Number of active Timer Activities found: " + $ActiveTimers.count) -LogType "Start"
+                  Try {
+                  ForEach ($Activity in $ActiveTimers) {
+                  If ((Get-Date) -gt $Activity.ScheduledEndTime) {
+                  $ActivityHash = @{"Status" = $enumCompleted}
+                  Set-SCSMObject -SMObject $Activity -PropertyHashTable $ActivityHash}
+                  LogThis ($Activity.id + " set to completed.") -LogType "Info"
+                  }
+                  }
+                  Catch{
+                  Logthis $_.exception.message -LogType "Error"
+                  }
 
+                  Function LogThis {
+                  #This function is to allow log files to be written as needed
+                  param($LogText, $LogType)
 
-					Try {
-					ForEach ($Activity in $ActiveTimers) {
-					If ((Get-Date) -gt $Activity.ScheduledEndTime) {
-					$ActivityHash = @{"Status" = $enumCompleted}
-					Set-SCSMObject -SMObject $Activity -PropertyHashTable $ActivityHash
-					}
-					}
-					}
-					Catch{
-					out-file "C:\temp\timererror.log" -InputObject $_.exception.message -append
-					}</ScriptBody>
+                  if ($LogEnable -eq 1) {
+                  $LogDate = get-date
+                  "$LogDate - $LogType - $logtext" | Out-File -filepath "$LogPath\TimerActivity.log" -append -encoding ascii
+                  }
+                  }
+                  }</ScriptBody>
                 <SnapIns></SnapIns>
                 <Parameters></Parameters>
                 <TimeoutSeconds>300</TimeoutSeconds>

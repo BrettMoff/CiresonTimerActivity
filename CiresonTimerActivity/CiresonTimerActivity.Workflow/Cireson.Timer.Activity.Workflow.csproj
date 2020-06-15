@@ -42,7 +42,7 @@
     <None Include="WorkflowMP\Timer_Activity_Workflow.xomlx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WorkflowMP\Cireson.TimerActivity.Workflow.xml" />
+    <Content Include="WorkflowMP\Cireson.Timer.Activity.Workflow.xml" />
     <Content Include="WorkflowMP\Timer_Activity_Workflow.dll" />
   </ItemGroup>
   <ItemGroup>
